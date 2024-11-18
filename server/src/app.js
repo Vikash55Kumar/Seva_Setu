@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 // build
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 // // const buildPath = path.join(__dirname, '../../client/dist');
 // const buildPath = path.join(__dirname, '/client/dist');
@@ -44,15 +44,14 @@ app.use(bodyParser.json());
 //   res.sendFile(path.join(buildPath, 'index.html'));
 // });
 
-const __dirname = path.resolve();
-
-const buildPath = path.join(__dirname, '/client/dist');
+const buildPath = path.join(__dirname, 'client', 'dist');
 
 app.use(express.static(buildPath)); 
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
+
 
 
 
