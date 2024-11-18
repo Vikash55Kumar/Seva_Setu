@@ -33,7 +33,9 @@ app.use(bodyParser.json());
 // build
 const __dirname = path.resolve();
 
-const buildPath = path.join(__dirname, '../../client/dist');
+// const buildPath = path.join(__dirname, '../../client/dist');
+const buildPath = path.join(__dirname, '/client/dist');
+
 
 app.use(express.static(buildPath));
 
