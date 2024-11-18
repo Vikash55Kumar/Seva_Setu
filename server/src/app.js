@@ -45,19 +45,13 @@ app.use(bodyParser.json());
 // });
 
 const __dirname = path.resolve();
-const buildPath = path.join(__dirname, '../../client/dist');
 
-app.use(express.static(buildPath));
-console.log('Serving static files from:', buildPath);
+const buildPath = path.join(__dirname, '/client/dist');
+
+app.use(express.static(buildPath)); 
 
 app.get('*', (req, res) => {
-  const indexPath = path.join(buildPath, 'index.html');
-  res.sendFile(indexPath, (err) => {
-    if (err) {
-      console.error(`Error serving ${indexPath}:`, err);
-      res.status(500).send('Unable to serve index.html');
-    }
-  });
+  res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 
