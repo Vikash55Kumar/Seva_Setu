@@ -380,7 +380,7 @@ export const logout = () => async (dispatch) => {
       sessionStorage.clear();
 
       // Optionally, call your backend to log out
-      await api.post("/users/logout");
+    //   await api.post("/users/logout");
 
       dispatch({ type: LOGOUT_SUCCESS });
 
@@ -487,7 +487,7 @@ export const loadUsers = () => async (dispatch) => {
             }
         };
 
-        const { data } = await api.get("/users/getUser", config);
+        const { data } = await api.get("/users/getUserDetails", config);
         console.log('API response:', data);
 
         dispatch({
