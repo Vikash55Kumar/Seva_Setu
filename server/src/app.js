@@ -39,7 +39,7 @@ app.use(express.static(buildPath));
 console.log('Serving static file from:', path.join(buildPath, 'index.html'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(buildPath, 'index.html'));
+  res.sendFile(path.join(buildPath, 'client/dist/index.html'));
 });
 
 // const buildPath = path.join(__dirname, 'client', 'dist');
