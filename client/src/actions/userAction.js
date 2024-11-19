@@ -300,7 +300,8 @@ export const getUserDetails = () => async (dispatch) => {
       };
   
       const {data} = await api.get("/users/getUserDetails", config); // Adjust the endpoint if necessary
-  
+      console.log("Get user : ", data);
+      
       dispatch({
         type: GET_USER_SUCCESS,
         payload: data,
@@ -487,7 +488,7 @@ export const loadUsers = () => async (dispatch) => {
             }
         };
 
-        const { data } = await api.get("/users/getUserDetails", config);
+        const { data } = await api.get("/users/getUser", config);
         console.log('API response:', data);
 
         dispatch({
