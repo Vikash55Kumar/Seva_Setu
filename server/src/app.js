@@ -17,7 +17,7 @@ SocketHandler(server);
 
 // CORS Setup
 app.use(cors({
-  origin: process.env.CORES_ORIGIN || "https://seva-setu.netlify.app",
+  origin: process.env.CORES_ORIGIN || "https://seva-setu.netlify.app" || "https://localhost:5173",
   methods: 'DELETE, POST, GET, PUT',
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'], 
   credentials: true,
@@ -33,24 +33,22 @@ app.use(bodyParser.json());
 // build
 const __dirname = path.resolve();
 
-// // const buildPath = path.join(__dirname, '../../client/dist');
-// const buildPath = path.join(__dirname, '/client/dist');
+const buildPath = path.join(__dirname, '../../client/dist');
 
-
-// app.use(express.static(buildPath));
-// console.log('Serving static file from:', path.join(buildPath, 'index.html'));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(buildPath, 'index.html'));
-// });
-
-const buildPath = path.join(__dirname, 'client', 'dist');
-
-app.use(express.static(buildPath)); 
+app.use(express.static(buildPath));
+console.log('Serving static file from:', path.join(buildPath, 'index.html'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
+
+// const buildPath = path.join(__dirname, 'client', 'dist');
+
+// app.use(express.static(buildPath)); 
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(buildPath, 'index.html'));
+// });
 
 
 
