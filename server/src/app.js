@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 const __dirname = path.resolve();
 
-const buildPath = path.join(__dirname, '/client/dist');
+const buildPath = path.join(__dirname, '../../client/dist');
 console.log('Build Path:', buildPath);
 console.log('Files in Build Path:', fs.readdirSync(buildPath));
 
