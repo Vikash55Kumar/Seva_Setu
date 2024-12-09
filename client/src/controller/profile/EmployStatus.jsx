@@ -8,8 +8,8 @@ import "./employ.css";
 
 const socket = io(`${import.meta.env.VITE_SOCKET_URL}`); // Connect to your backend
 
-const EmployeeProgress = ({ profile = {} }) => {
-  const { fullName, email, avatar } = profile || {};
+const EmployeeProgress = ({ profile = {}, adminProfile = {} }) => {
+  const { fullName, email, avatar } = profile || adminProfile || {};
   
   const [employees, setEmployees] = useState([]);
 
@@ -79,7 +79,7 @@ const EmployeeProgress = ({ profile = {} }) => {
             <div className="profile">
               <div className="profile-header">
                 <div className="image">
-                  <img src={profile.image?.url || avatar} alt="Profile" />
+                  <img src={avatar} alt="Profile" />
                 </div>
                 <div className="name">
                   <h2>{fullName || 'Full Name Not Available'}</h2>

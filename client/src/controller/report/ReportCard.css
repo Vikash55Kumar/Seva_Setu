@@ -1,0 +1,55 @@
+/* Container styling */
+.pdf-card-container {
+    width: 220px;
+    border-radius: 5px;
+    padding: 15px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  }
+  
+  /* Flex container styling */
+  .pdf-card-flex {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  /* Bold text styling */
+  .pdf-card-bold {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  /* Thin text styling */
+  .pdf-card-thin {
+    font-size: 11px;
+    color: #6f6f6f;
+    font-weight: 500;
+  }
+  
+  /* Button styling */
+  .pdf-card-btn {
+    border-radius: 3px;
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    font-size: 11px;
+    color: #4f4f4f;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /* Actions container */
+  .pdf-card-actions {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+  }
+  

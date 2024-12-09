@@ -2,14 +2,19 @@ import React from 'react'
 import { Line } from 'react-chartjs-2';
 import "./LinearTotal.css"
 
-export default function LinearTotal() {
+export default function LinearTotal({labels=[], labelsName, data = []}) {
 
     const lineData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        // labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        labels: labels,
+
         datasets: [
           {
-            label: 'Certificates Issued',
-            data: [10000, 7650, 3450, 9430, 5540],
+            // label: 'Certificates Issued',
+            label: labelsName,
+            // data: [10000, 7650, 3450, 9430, 5540],
+            data: data,
+
             borderColor: 'rgba(0, 123, 255, 1)', 
             backgroundColor: 'rgba(0, 123, 255, 0.2)', 
             borderWidth: 2,
@@ -26,7 +31,7 @@ export default function LinearTotal() {
   return (
     <div>
         <section className="overview">
-            <h2 className="overview-title">Overview</h2>
+            <h2 className="overview-title">Monthly Overview</h2>
             <p className="overview-description" style={{textAlign:"center"}}>
                 Certificate issuance status across Jodhpur.
             </p>

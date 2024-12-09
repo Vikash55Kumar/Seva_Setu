@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "../certificate/das.css";
 import { io } from "socket.io-client";
-import Map from "../certificate/Map";
-import AlertList from "../dashboard/AlertList";
 import LinearTotal from "./LinearTotal";
 import { getChartOptions } from "../certificate/ChartOption";
 import { getChartData } from "../certificate/ChartData";
 import { Bar } from "react-chartjs-2";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { generateReport } from "../../actions/adminAction";
 import { DownloadPDF } from "../report/DownloadPdf";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import SpinnerLoader from "../../utility/SpinnerLoader";
 
 const socket = io(`${import.meta.env.VITE_SOCKET_URL}`);
 
@@ -20,11 +19,15 @@ const MetricCard = ({ title, value }) => (
   </div>
 );
 
-export default function Dashboard() {
-  const totalForms = 23618;
-  const pendingForms = 7090;
-  const processedForms = 14434;
-  const rejectedForms = 2094;
+export default function BirthCertificate() {
+
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const totalForms = 2043;
+  const pendingForms = 1235;
+  const processedForms = 608;
+  const rejectedForms = 200;
 
   const [formStats, setFormStats] = useState({
     totalForms: totalForms,
@@ -33,30 +36,23 @@ export default function Dashboard() {
     rejectedForms: rejectedForms,
   });
 
-  const title = "Forms Monitoring Dashboard Jodhpur";
+  const title = "Forms Monitoring Dashboard Birth Certificate"
 
-  const formTitle = "Type of Certificates";
-
-  const formTypesData = [
-    { name: 'Cast Certificate', FormsReceived: 3634, pendingForms: 1286, ProcessedForms: 2100, rejectedForms: 248 },
-    { name: 'Income Certificate', FormsReceived: 2374, pendingForms: 587, ProcessedForms: 1700, rejectedForms: 87 },
-    { name: 'Birth Certificate', FormsReceived: 2043, pendingForms: 1235, ProcessedForms: 608, rejectedForms: 200 },
-    { name: 'Residential Certificate', FormsReceived: 3643, pendingForms: 1308, ProcessedForms: 1859, rejectedForms: 476 },
-  ];
+  const formTitle = "Birth Certificate"
 
   //Linear Total
-  const labels = ["Jan", "Feb", "Mar", "Apr", "May"];
+  const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May']
 
-  const labelsName = "Certificates Issued";
+  const labelsName = 'Birth Certificate Issued'
 
-  const data = [60000, 47650, 60450, 34030, 65040];
+  const data = [10000, 7650, 3450, 9430, 5540]
 
   const chartData = getChartData(formStats);
   const chartOptions = getChartOptions();
 
   useEffect(() => {
     // Listen for form statistics updates from the backend
-    socket.on("formStatisticsUpdate", (data) => {
+    socket.on("birthCertificateUpdate", (data) => {
       setFormStats({
         totalForms: data.totalForms,
         pendingForms: data.pendingForms,
@@ -67,31 +63,50 @@ export default function Dashboard() {
 
     // Clean up event listener when component unmounts
     return () => {
-      socket.off("formStatisticsUpdate");
+      socket.off("birthCertificateUpdate");
     };
   }, []);
 
+  const handleGenerateReport = async () => {
+    const reportData = {
+      title: title,
+      formTitle: formTitle,
+      totalForms: formStats.totalForms,
+      pendingForms: formStats.pendingForms,
+      processedForms: formStats.processedForms,
+      rejectedForms: formStats.rejectedForms,
+      labels: labels,
+      labelsName: labelsName,
+      data: data,
+    };
+
+    try {
+      const response = await dispatch(generateReport(reportData));
+      toast.success("Birth Report generated successfully!");
+      console.log("Birth Report Response:", response);
+    } catch (error) {
+      console.error("Error generating birth report:", error);
+      toast.error("Failed to generate birth report.");
+    }
+  };
+
   const handleDownloadPDF = async () => {
-    // DownloadPDF(formTitle)
-    const element = document.querySelector(".das");
-    const canvas = await html2canvas(element, { scale: 3 });
-    
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", [210, 600]);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-  
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(`${formTitle}.pdf`);
-    // Generate base64 data URL
-    const pdfURL = pdf.output("bloburl");
-    
-    // Open PDF in a new tab or window
-    window.open(pdfURL);
+
+    setLoading(true); // Start the spinner
+    try {
+      await DownloadPDF(formTitle); // Wait for the PDF to download
+      toast.success("Report downloaded successfully!");
+    } catch (error) {
+      console.error("Error downloading report:", error);
+      toast.error("Failed to download report.");
+    } finally {
+      setLoading(false); // Stop the spinner
+    }
   };
 
   return (
-    <div className="das">
+    <div className="report">
+    
       <h1>Revenue Depertment Rajasthan</h1>
 
       <div className="dashboard">
@@ -116,37 +131,28 @@ export default function Dashboard() {
         <div className="chart-container2">
           <Bar data={chartData} options={chartOptions} />
           <div className="buttons">
+            <button type="button" className="btn btn-primary" onClick={handleGenerateReport} > 
+              Generate Report
+            </button>
+            <br />
+            <br />
+            {loading ? (
+            <SpinnerLoader />
+          ) : (
             <button type="button" className="btn btn-success" onClick={handleDownloadPDF}>
               Download Report
             </button>
+          )}
           </div>
         </div>
       </div>
 
-      <Map
-        formData={formTypesData}
-        // data={districtData}
-        colorScale={["#f0f8ff", "#4682b4"]}
-      />
-
-      <section className="alerts">
-        <h2>Alerts</h2>
-        <p style={{ textAlign: "center" }}>
-          Alerts for subdivisions with high demand.
-        </p>
-        <AlertList />
-      </section>
-
       <section className="overview">
-        <LinearTotal labels={labels} data={data} labelsName={labelsName} />
+      <LinearTotal labels={labels} data={data} labelsName={labelsName} formTitle={formTitle} />
       </section>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
+      <br/><br/><br/><br/><br/><br/>
     </div>
-  );
+  )
 }

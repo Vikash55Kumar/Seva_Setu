@@ -45,6 +45,24 @@
     width: 100%;
     max-width: 600px;
   }
+
+  .chart-container2 {
+    display: flex;
+    justify-content: center;
+    /* max-width: 100vw; */
+    width: 100%;
+/* width: 800px; */
+    max-width: 800px;
+  }
+
+  .buttons {
+    margin: 2rem;
+  }
+  
+  button {
+    width: 11rem;
+    height: 3.5rem;
+  }
   
   @keyframes slideUp {
     0% {

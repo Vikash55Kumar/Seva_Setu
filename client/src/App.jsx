@@ -6,11 +6,11 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Navbar from './controller/navbar/Navbar';
 import Footer from './controller/footer/Footer';
-import HomePage from './controller/homePage/HomePage';
-import Login from './controller/user/Login';
+// import HomePage from './controller/homePage/HomePage';
+
 import TermService from './controller/term/TermService';
-import PrivacyPolicy from './controller/term/PrivacyPolicy';
-import Signup from './controller/user/Signup';
+// import PrivacyPolicy from './controller/term/PrivacyPolicy';
+
 import Dashboard from './controller/dashboard/Dashboard';
 import Certificate from './controller/certificate/Certificate';
 import Contact from './controller/contact/Contact';
@@ -25,6 +25,22 @@ import { SocketProvider } from './utility/SocketContext';
 import EmployeeProgress from './controller/profile/EmployStatus';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UserLogin from './controller/user/UserLogin';
+import UserSignup from './controller/user/UserSignup';
+import CastCertificate from './controller/dashboard/CastCertificate';
+import IncomeCertificate from './controller/dashboard/IncomeCertificate';
+import ResidentialCertificate from './controller/dashboard/ResidentalCertificate';
+import MerriageCertificate from './controller/dashboard/MarriageCertificate';
+import SeniorcitizenCertificate from './controller/dashboard/SeniorcitizenCertificate';
+import RationcardCertificate from './controller/dashboard/RationcardCertificate';
+import DisabilityCertificate from './controller/dashboard/DisabilityCertificate';
+import CharacterCertificate from './controller/dashboard/CharacterCertificate';
+import BirthCertificate from './controller/dashboard/BirthCertificate';
+import { getAdminDetails, getReport, loadAdmin } from './actions/adminAction';
+import AdminLogin from './controller/user/AdminLogin';
+import ReporList from './controller/report/ReportList';
+import ReportPdf from './controller/report/ReportPdf';
+// import ReportPdf from './controller/report/ReportPdf';
 
 
 
@@ -33,10 +49,26 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUsers());
+    dispatch(loadAdmin());
     dispatch(getUserDetails());
+    dispatch(getAdminDetails())
+    dispatch(getReport())
   }, [dispatch]);
 
-  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => ({
+    isAuthenticated: state.admin?.isAuthenticated || state.user?.isAuthenticated,
+  }));
+
+  const { admin} = useSelector((state) => state.admin);
+
+  const { user} = useSelector((state) => state.user);
+
+  const {report} = useSelector((state) => state.report);
+
+  const title = "Hello 1";
+
+  // console.log(report);
+  
 
   return (
     <>
@@ -57,24 +89,30 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <Login /> } />
-            <Route path='/certificate' element={isAuthenticated ? <Certificate /> : <Login />} />
+            <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <UserLogin /> } />
+            <Route path='/certificate' element={isAuthenticated ? <Certificate /> : <UserLogin />} />
             <Route path='/certificateForm' element={<CertificateForm />} />
-            <Route path='/profile' element={
-                isAuthenticated 
-                ? (loading ? <div>Loading...</div> : user && user.data 
-                  ? <Profile profile={user.data} />
-                    : <div>Profile not found</div>)
-                : <HomePage />} 
-            />
-            <Route path='/employProgress' element={isAuthenticated  ? <EmployeeProgress profile={user.data} /> : <Home />} />
+            <Route path='/profile'  element={<Profile profile={user?.data || null} adminProfile={admin?.data || null} />}/>
+            <Route path='/employProgress' element={<EmployeeProgress profile={user?.data || null} adminProfile={admin?.data || null} /> } />
             <Route path='/contact' element={<Contact />} />
-            <Route path='/login' element={!isAuthenticated ? <Login /> : <Home/>} />
-            <Route path='/signup' element={<Signup />} />
+            <Route path='/login' element={!isAuthenticated ? <UserLogin /> : <Home/>} />
+            <Route path='/adminLogin' element={<AdminLogin /> } />
+            <Route path='/signup' element={<UserSignup />} />
             <Route path="/google-login" element={<GoogleLogin />} />
             <Route path='/forgot' element={<ForgotPassword /> } />
             <Route path='/term' element={<TermService />} />
-            <Route path='/privacy' element={<PrivacyPolicy />} />
+            {/* <Route path='/privacy' element={<PrivacyPolicy />} /> */}
+            <Route path='/casteCertificate' element={<CastCertificate />} />
+            <Route path='/incomeCertificate' element={<IncomeCertificate />} />
+            <Route path='/merriageCertificate' element={ <MerriageCertificate /> } />
+            <Route path='/seniorcitizenCertificate' element={ <SeniorcitizenCertificate /> } />
+            <Route path='/rationcardCertificate' element={ <RationcardCertificate /> } />
+            <Route path='/disabilityCertificate' element={ <DisabilityCertificate /> } />
+            <Route path='/characterCertificate' element={ <CharacterCertificate /> } />
+            <Route path='/birthCertificate' element={ <BirthCertificate /> } />
+            <Route path='/residentialCertificate' element={ <ResidentialCertificate /> } />
+            <Route path='/reportList' element={<ReporList title={title} />} />
+            <Route path='/reportPdf' element={<ReportPdf />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

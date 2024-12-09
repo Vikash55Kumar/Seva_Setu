@@ -497,7 +497,7 @@ export const loadUsers = () => async (dispatch) => {
         });
 
     } catch (error) {
-        console.error('Error:', error);
+        // console.error('Error:', error);
         dispatch({
           type: LOGIN_FAIL,
           payload: error.response?.data?.message || error.message,

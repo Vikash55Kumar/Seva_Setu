@@ -14,7 +14,9 @@ const Navbar = () => {
     const [isSubDropdownOpen2, setIsSubDropdownOpen2] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const { isAuthenticated } = useSelector((state) => state.user);
+    const { isAuthenticated } = useSelector((state) => ({
+        isAuthenticated: state.admin?.isAuthenticated || state.user?.isAuthenticated,
+      }));
     const [loading, setLoading] = useState(false);
 
     const handleLogout = async (e) => {
@@ -65,6 +67,7 @@ const Navbar = () => {
             
             <div className={`nav-links ${isNavOpen ? "active" : ""}`}>
                 <a href="/">Home</a>
+                <a href="/reportList">Report</a>
                 {isAuthenticated ? <a className="prf" onClick={(e) => handleNavigation(e, "/profile")}>Profile</a> : ""}
                 
                 <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
@@ -115,8 +118,8 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <a href="/signup">Signup</a>
-                                <a href="/login">Login</a>
+                                <a href="/login">User Login</a>
+                                <a href="/adminLogin">Admin Login</a>
                             </>
                         )}
                     </div>

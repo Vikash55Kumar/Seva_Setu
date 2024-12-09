@@ -44,10 +44,6 @@ const userSchema = new mongoose.Schema(
         avatar: {
             type :String,
         },
-
-        coverImage: {
-            type: String,
-        },
         createdAt: {
             type: Date,
             default: Date.now,

@@ -22,7 +22,7 @@ export default function Certificate() {
         <h2>Certificate Apply</h2>
         <div className="certificate">
           {/* Replace default href with onClick handler */}
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard')}>Caste Certificate</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard')}>Cast Certificate</a></div>
           <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard')}>Income Certificate</a></div>
           <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard')}>Residential Certificate</a></div>
           <div className="card"><a onClick={(e) => handleNavigation(e, '/ration-card')}>Ration Card</a></div>

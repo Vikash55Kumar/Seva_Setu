@@ -5,20 +5,8 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 import passport from "../utils/passport.js";
 const router = Router();
 
-// router.route("/register").post(upload.single("image"), registerUser)
-router.route("/register").post(
-  upload.fields([
-      {
-          name: "avatar",
-          maxCount: 1
-      }, 
-      {
-          name: "coverImage",
-          maxCount: 1
-      }
-  ]),
-  registerUser
-)
+
+router.route("/register").post( upload.fields([{ name: "avatar", maxCount: 1 }]), registerUser )
 
 router.route("/login").post(loginUser)
 
@@ -31,12 +19,6 @@ router.route("/getUserDetails").get(getUserDetails)
 router.route("/updateAccount").patch(verifyJWT, updateAccountDetails)
 
 router.route("/googleLogin").post(googleAuth)
-
-// router.route("/updateAvatar").patch(verifyJWT, upload.single("avatar"), updateUserAvatar)
-
-// router.route("/updateCoverImage").patch(verifyJWT, upload.single("avatar"), updateUserCoverImage)
-
-// router.route("/channelProfile").post(getUserChannelProfile)
 
 
 // secure routers

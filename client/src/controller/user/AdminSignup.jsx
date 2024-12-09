@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import SpinnerLoader from '../../utility/SpinnerLoader';
 
 
-export default function Signup() {
+export default function AdminSignup() {
     const dispatch = useDispatch();
     const nevigate = useNavigate()
 
@@ -16,7 +16,6 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [conformPassword, setConformPassword] = useState('');
-    const [phone, setPhone] = useState('');
     const [avatar, setAvatar] = useState('');
     const [loading, setLoading] = useState(false); // Loading state to manage spinner visibility
 
@@ -30,7 +29,6 @@ export default function Signup() {
         myForm.append("email", email);
         myForm.append("password", password);
         myForm.append("conformPassword", conformPassword); 
-        myForm.append("phoneNumber", phone);
         myForm.append("avatar", avatar);
         
         try {
@@ -45,7 +43,6 @@ export default function Signup() {
                 setEmail('');
                 setPassword('');
                 setConformPassword('');
-                setPhone('');
                 setAvatar('');
 
                 setLoading(false); 
@@ -65,12 +62,12 @@ export default function Signup() {
 
     };
 
-    const handleGoogleLogin = () => {
-      setLoading(true);
-      // window.location.href = 'https://seva-setu.onrender.com/api/v1/users/auth/google';
-      window.location.href=`${import.meta.env.VITE_GOOGLE_URL}`
-      // window.location.href = '/api/v1/users/auth/google'
-    };
+    // const handleGoogleLogin = () => {
+    //   setLoading(true);
+    //   // window.location.href = 'https://seva-setu.onrender.com/api/v1/users/auth/google';
+    //   window.location.href=`${import.meta.env.VITE_GOOGLE_URL}`
+    //   // window.location.href = '/api/v1/users/auth/google'
+    // };
 
   return (
 
@@ -80,13 +77,13 @@ export default function Signup() {
           <SpinnerLoader /> 
       ) : (
         <>
-          <h2>SignUp on SevaSetu</h2>
+          <h2>Admin SignUp on SevaSetu</h2>
             <h4 className="mt-2 mb-3">Have an account? <a href="/login">Log In</a></h4>
             <div id="auth-account">
-               <a onClick={handleGoogleLogin}>
+               {/* <a onClick={handleGoogleLogin}>
                     <img src={googleImg} alt="Google Icon" />
                     <div>Continue with Google</div>
-                </a>
+                </a> */}
               <p className="mt-2">—— <b>Or</b> ——</p>
             </div>
             <form onSubmit={handleSignUp} className='form'>
@@ -131,18 +128,6 @@ export default function Signup() {
                   placeholder="* Enter Confirm Password"
                   value={conformPassword}
                   onChange={(e) => setConformPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group-2">
-                <label htmlFor="phone">Phone Number:</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  pattern="[0-9]{10,14}"
-                  placeholder="* Enter Valid Phone Number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
                   required
                 />
               </div>

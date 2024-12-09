@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import "./auth.css";
 import { useDispatch } from 'react-redux';
-import { login } from '../../actions/userAction';
+import { login } from '../../actions/adminAction';
 import { useNavigate } from 'react-router-dom';
 import googleImg from "../../assets/google.png";
 import { toast } from 'react-toastify';
 import SpinnerLoader from '../../utility/SpinnerLoader';
 
-export default function Login() {
+export default function AdminLogin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ export default function Login() {
         try {
             const response = await dispatch(login(myForm));
             if (response.status === 200) {
-                toast.success("Login Successfully!");
+                toast.success("Admin Login Successfully!");
                 setEmail('');
                 setPassword('');
                 setLoading(false); // Hide spinner after successful login
@@ -41,11 +41,11 @@ export default function Login() {
         }
     };
 
-    const handleGoogleLogin = () => {
-        setLoading(true);
-        // window.location.href = 'https://seva-setu.onrender.com/api/v1/users/auth/google';
-        window.location.href=`${import.meta.env.VITE_GOOGLE_URL}`
-    };
+    // const handleGoogleLogin = () => {
+    //     setLoading(true);
+    //     // window.location.href = 'https://seva-setu.onrender.com/api/v1/users/auth/google';
+    //     window.location.href=`${import.meta.env.VITE_GOOGLE_URL}`
+    // };
 
     return (
         <div className="account-set-main">
@@ -54,16 +54,15 @@ export default function Login() {
                     <SpinnerLoader /> // Show spinner if loading is true
                 ) : (
                     <>
-                        <h2>Login on SevaSetu</h2>
-                        <h4 className="mt-2 mb-3">Don't have an account? <a href="/signup">Sign Up</a></h4>
+                        <h2>Admin Login on SevaSetu</h2>
 
                         <div id="auth-account">
-                            <a onClick={handleGoogleLogin}>
+                            {/* <a onClick={handleGoogleLogin}>
                                 <img src={googleImg} alt="Google Icon" />
                                 <div>Continue with Google</div>
-                            </a>
+                            </a> */}
 
-                            <p className="mt-2">—— <b>Or</b> ——</p>
+                            {/* <p className="mt-2">—— <b>Or</b> ——</p> */}
                         </div>
 
                         <form onSubmit={handleLogin}>
@@ -92,6 +91,7 @@ export default function Login() {
                             <div className="form-group-2">
                                 <button type="submit">Login</button>
                             </div>
+                            <h4 className="mt-2 mb-3">Don't have an account? <a href="/signup">Sign Up</a></h4>
                         </form>
                     </>
                 )}

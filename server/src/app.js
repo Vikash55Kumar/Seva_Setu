@@ -6,6 +6,9 @@ import session from 'express-session';
 import passport from './utils/passport.js';
 import { createServer } from 'http';
 import { SocketHandler } from './utils/socketHandler.js';  // Import the WebSocket handler
+import userRouter from './routes/user.route.js';
+import adminRouter from './routes/admin.router.js'
+import reportRouter from './routes/report.router.js'
 import MongoStore from 'connect-mongo';
 import path from 'path';
 
@@ -17,6 +20,7 @@ SocketHandler(server);
 
 // CORS Setup
 app.use(cors({
+  // origin: "http://localhost:5173",
   origin: process.env.CORES_ORIGIN || "https://seva-setu.netlify.app" || "https://localhost:5173",
   methods: 'DELETE, POST, GET, PUT',
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'], 
@@ -70,9 +74,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // Routers import
-import userRouter from './routes/user.route.js';
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/admin', adminRouter);
+app.use('/api/v1/report', reportRouter)
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
