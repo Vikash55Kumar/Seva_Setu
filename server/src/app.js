@@ -39,13 +39,13 @@ app.use(bodyParser.json());
 
 const __dirname = path.resolve();
 
-const buildPath = path.join(__dirname, '../../client/dist');
+// const buildPath = path.join(__dirname, '../../client/dist');
 
-app.use(express.static(buildPath)); 
+// app.use(express.static(buildPath)); 
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(buildPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(buildPath, 'index.html'));
+// });
 // app.get('*', (req, res, next) => {
 //   if (req.path.startsWith('/api')) {
 //       next(); // Allow API routes to proceed
@@ -53,6 +53,13 @@ app.get('*', (req, res) => {
 //       res.sendFile(path.join(buildPath, 'index.html'));
 //   }
 // });
+
+const buildPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(buildPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
+});
+
 
 
 
