@@ -41,7 +41,7 @@ const __dirname = path.resolve();
 
 const buildPath = path.join(__dirname, '../../client/dist');
 console.log('Build Path:', buildPath);
-console.log('Files in Build Path:', fs.readdirSync(buildPath));
+// console.log('Files in Build Path:', fs.readdirSync(buildPath));
 
 app.use(express.static(buildPath)); 
 
