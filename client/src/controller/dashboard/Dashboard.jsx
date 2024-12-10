@@ -10,6 +10,7 @@ import { Bar } from "react-chartjs-2";
 import { DownloadPDF } from "../report/DownloadPdf";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useLocation } from "react-router-dom";
 
 const socket = io(`${import.meta.env.VITE_SOCKET_URL}`);
 
@@ -20,7 +21,13 @@ const MetricCard = ({ title, value }) => (
   </div>
 );
 
-export default function Dashboard() {
+export default function Dashboard({adminProfile = {}}) {
+  const location = useLocation();
+  const title2 = location.state?.title || "Jodhpur";
+  const stateTitle = location.state?.stateTitle || "Rajasthan";
+
+  const { provider } = adminProfile || {}; 
+
   const totalForms = 23618;
   const pendingForms = 7090;
   const processedForms = 14434;
@@ -33,7 +40,7 @@ export default function Dashboard() {
     rejectedForms: rejectedForms,
   });
 
-  const title = "Forms Monitoring Dashboard Jodhpur";
+  const title = `Forms Monitoring Dashboard ${title2}`;
 
   const formTitle = "Type of Certificates";
 
@@ -92,7 +99,7 @@ export default function Dashboard() {
 
   return (
     <div className="das">
-      <h1>Revenue Depertment Rajasthan</h1>
+      <h1>Revenue Depertment {stateTitle}</h1>
 
       <div className="dashboard">
         <h2>{title}</h2>
@@ -115,11 +122,13 @@ export default function Dashboard() {
         </div>
         <div className="chart-container2">
           <Bar data={chartData} options={chartOptions} />
+          { provider=="Officer" ? 
           <div className="buttons">
             <button type="button" className="btn btn-success" onClick={handleDownloadPDF}>
               Download Report
             </button>
           </div>
+          : ""}
         </div>
       </div>
 
@@ -138,7 +147,7 @@ export default function Dashboard() {
       </section>
 
       <section className="overview">
-        <LinearTotal labels={labels} data={data} labelsName={labelsName} />
+        <LinearTotal labels={labels} data={data} labelsName={labelsName} title2={title2} />
       </section>
 
       <br />

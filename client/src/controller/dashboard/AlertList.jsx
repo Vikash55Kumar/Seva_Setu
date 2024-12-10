@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './AlertList.css';
 
+
+const subdivisions = ["Caste Certficate", "Income Certificate", "Birth Certificate", "Character Certificate", "Disability Certificate", "Marraiage Certificate", "RationCard Certificate", "Residential Certificate", "SeniorCitizen Certificate"]
+const messageSub = ["Jodhpur", "Phalodi", "Shergarh", "Osian", "Piapar City", "Bilara", "Bhopalgarh", "Luni", "Balesar"]
+
 // Mock function to simulate receiving alerts
 const fetchAlerts = (callback) => {
+  
   setInterval(() => {
+    const randomSubdivision = subdivisions[Math.floor(Math.random() * subdivisions.length)]; // Randomly select a subdivision
+    const randommessageSub = messageSub[Math.floor(Math.random() * messageSub.length)]; // Randomly select a subdivision
     const mockAlert = {
       id: Date.now(),
-      subdivision: `Subdivision ${Math.floor(Math.random() * 10) + 1}`,
-      message: `High demand detected in Subdivision ${Math.floor(Math.random() * 10) + 1}`,
+      subdivision: randomSubdivision,
+      message: `High demand detected in Subdivision ${randommessageSub}`
     };
     callback(mockAlert);
   }, 5000); // Fetch a new alert every 5 seconds

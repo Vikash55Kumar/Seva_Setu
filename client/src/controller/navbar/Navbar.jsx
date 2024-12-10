@@ -7,13 +7,17 @@ import logo from "../../assets/logo.png";
 import { useNavigate } from 'react-router-dom';
 import SpinnerLoader from '../../utility/SpinnerLoader';
 
-const Navbar = () => {
+const Navbar = ({adminProfile = {}}) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSubDropdownOpen, setIsSubDropdownOpen] = useState(false);
     const [isSubDropdownOpen2, setIsSubDropdownOpen2] = useState(false);
+    
     const dispatch = useDispatch();
     const navigate = useNavigate()
+
+    const { provider } = adminProfile || {}; 
+
     const { isAuthenticated } = useSelector((state) => ({
         isAuthenticated: state.admin?.isAuthenticated || state.user?.isAuthenticated,
       }));
@@ -29,12 +33,13 @@ const Navbar = () => {
         navigate("/")
     };
 
-    const handleNavigation = (e, path) => {
+    const handleNavigation = (e, path, title, stateTitle) => {
         e.preventDefault();
+
         setLoading(true);  // Show spinner when a link is clicked
         setTimeout(() => {
             setLoading(false); // Hide spinner after delay
-            navigate(path);  // Navigate to the specified path
+            navigate(path, {state: {title, stateTitle}} );  // Navigate to the specified path
         }, 1500);  // You can adjust the delay as needed
     };
     
@@ -67,9 +72,10 @@ const Navbar = () => {
             
             <div className={`nav-links ${isNavOpen ? "active" : ""}`}>
                 <a href="/">Home</a>
-                <a href="/reportList">Report</a>
-                {isAuthenticated ? <a className="prf" onClick={(e) => handleNavigation(e, "/profile")}>Profile</a> : ""}
                 
+                {isAuthenticated ? <a href="/profile">Profile</a> : ""}
+                { provider=="Officer" ? <a href="/reportDashboard">Report</a> : ""}
+
                 <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
                     <a href="#!" className="dropdown-toggle" onClick={toggleDropdown}>
                         Services
@@ -81,29 +87,25 @@ const Navbar = () => {
                             </a>
                             {isSubDropdownOpen && (
                                 <div className="dropdown-menu nested-dropdown">
-                                    {/* <a href="/certificate">Jodhpur</a>
-                                    <a href="/service2">Jaipur</a>
-                                    <a href="/service3">Kota</a>
-                                    <a href="/service3">Udaipur</a> */}
-                                    <a onClick={(e) => handleNavigation(e, "/certificate")}>Jodhpur</a>
-                                    <a onClick={(e) => handleNavigation(e, "/service2")}>Jaipur</a>
-                                    <a onClick={(e) => handleNavigation(e, "/service3")}>Kota</a>
-                                    <a onClick={(e) => handleNavigation(e, "/service4")}>Udaipur</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "Jodhpur", "Rajasthan")}>Jodhpur</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "Jaipur", "Rajasthan")}>Jaipur</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "Kota", "Rajasthan")}>Kota</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "Udaipur", "Rajasthan")}>Udaipur</a>
                                 </div>
                             )}
 
                             {/* Delhi */}
-                            {/* <a href="#!" className="dropdown-toggle" onClick={toggleSubDropdown2}>
+                            <a href="#!" className="dropdown-toggle" onClick={toggleSubDropdown2}>
                                 Delhi
                             </a>
                             {isSubDropdownOpen2 && (
                                 <div className="dropdown-menu nested-dropdown">
-                                    <a href="/service1">North</a>
-                                    <a href="/service2">North-East</a>
-                                    <a href="/service3">South-West</a>
-                                    <a href="/service3">West</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "North", "Delhi")}>North</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "North-East", "Delhi")}>North-East</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "South-West", "Delhi")}>South-West</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "West", "Delhi")}>West</a>
                                 </div>
-                            )} */}
+                            )}
                         </div>
                     )}
                 </div>
@@ -118,8 +120,8 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <a href="/login">User Login</a>
-                                <a href="/adminLogin">Admin Login</a>
+                                <a href="/login">Employee Login</a>
+                                <a href="/adminLogin">Officer Login</a>
                             </>
                         )}
                     </div>

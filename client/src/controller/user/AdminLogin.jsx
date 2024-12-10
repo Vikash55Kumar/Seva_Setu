@@ -5,12 +5,13 @@ import { login } from '../../actions/adminAction';
 import { useNavigate } from 'react-router-dom';
 import googleImg from "../../assets/google.png";
 import { toast } from 'react-toastify';
+import logo from "../../assets/logo.png"
 import SpinnerLoader from '../../utility/SpinnerLoader';
 
 export default function AdminLogin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const [officerId, setOfficerId] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false); // Loading state to manage spinner visibility
 
@@ -19,15 +20,15 @@ export default function AdminLogin() {
         setLoading(true); // Show spinner when login starts
         
         const myForm = {
-            email,
+            officerId,
             password
         };
         
         try {
             const response = await dispatch(login(myForm));
             if (response.status === 200) {
-                toast.success("Admin Login Successfully!");
-                setEmail('');
+                toast.success("Officer Login Successfully!");
+                setOfficerId('');
                 setPassword('');
                 setLoading(false); // Hide spinner after successful login
                 navigate("/");
@@ -54,26 +55,21 @@ export default function AdminLogin() {
                     <SpinnerLoader /> // Show spinner if loading is true
                 ) : (
                     <>
-                        <h2>Admin Login on SevaSetu</h2>
-
                         <div id="auth-account">
-                            {/* <a onClick={handleGoogleLogin}>
-                                <img src={googleImg} alt="Google Icon" />
-                                <div>Continue with Google</div>
-                            </a> */}
-
-                            {/* <p className="mt-2">—— <b>Or</b> ——</p> */}
+                            <img src={logo} className="logoDas" alt="Logo" />
                         </div>
+
+                        <h3>Officer Login on SevaSetu</h3>
 
                         <form onSubmit={handleLogin}>
                             <div className="form-group-2">
-                                <label htmlFor="email">Email:</label>
+                                <label htmlFor="officerId">Officer Id:</label>
                                 <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="* Enter email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="officerId"
+                                    id="officerId"
+                                    placeholder="* Enter officer Id"
+                                    value={officerId}
+                                    onChange={(e) => setOfficerId(e.target.value)}
                                     required
                                 />
                             </div>
@@ -91,7 +87,7 @@ export default function AdminLogin() {
                             <div className="form-group-2">
                                 <button type="submit">Login</button>
                             </div>
-                            <h4 className="mt-2 mb-3">Don't have an account? <a href="/signup">Sign Up</a></h4>
+                            {/* <h4 className="mt-2 mb-3">Don't have an account? <a href="/signup">Sign Up</a></h4> */}
                         </form>
                     </>
                 )}

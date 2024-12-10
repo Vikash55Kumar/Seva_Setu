@@ -12,7 +12,7 @@ export default function Profile({profile = {}, adminProfile = {}}) {
         <div className="profile-container">
           <div className="menu">
             <h2>{fullName || 'Full Name Not Available'}</h2>
-            { provider=="admin" ? (
+            { provider=="Officer" ? (
               <>
               </>
             ) : (

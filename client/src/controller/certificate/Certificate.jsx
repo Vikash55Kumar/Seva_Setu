@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import "./Certificate.css";
 import SpinnerLoader from '../../utility/SpinnerLoader'; // Importing Spinner
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Certificate() {
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate() 
 
-  const handleNavigation = (e, path) => {
+  const location = useLocation();
+  const title = location.state?.title;
+  const stateTitle = location.state?.stateTitle;
+
+  const handleNavigation = (e, path, title) => {
     e.preventDefault();
     setLoading(true);    
 
     setTimeout(() => {
       setLoading(false);  // Hide spinner after delay
-      window.location.href = path;  // Navigate to the actual path
+      navigate(path, { state: { title, stateTitle } });   // Navigate to the actual path
     }, 1500);  // Adjust delay as needed
   };
 
@@ -19,19 +25,19 @@ export default function Certificate() {
     <>
       {loading && <SpinnerLoader />}  
       <div>
-        <h2>Certificate Apply</h2>
+        <h2>Certificate Monitoring {title} </h2>
         <div className="certificate">
           {/* Replace default href with onClick handler */}
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard')}>Certificate Dashboard</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/casteCertificate')}>Caste Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/incomeCertificate')}>Income Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/residentialCertificate')}>Residential Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/rationcardCertificate')}>Ration Card</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/birthCertificate')}>Birth Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/disabilityCertificate')}>Disability Certificates</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/merriageCertificate')}>Merriage Certificates</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/seniorcitizenCertificate')}>Senior Citizen Certificates</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/characterCertificate')}>Character Certificates</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard', title, stateTitle)}>Certificate Dashboard</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/casteCertificate', title, stateTitle)}>Caste Certificate</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/incomeCertificate', title, stateTitle)}>Income Certificate</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/residentialCertificate', title, stateTitle)}>Residential Certificate</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/rationcardCertificate', title, stateTitle)}>Ration Card</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/birthCertificate', title, stateTitle)}>Birth Certificate</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/disabilityCertificate', title, stateTitle)}>Disability Certificates</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/merriageCertificate', title, stateTitle)}>Merriage Certificates</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/seniorcitizenCertificate', title, stateTitle)}>Senior Citizen Certificates</a></div>
+          <div className="card"><a onClick={(e) => handleNavigation(e, '/characterCertificate', title, stateTitle)}>Character Certificates</a></div>
         </div>
       </div>
     </>

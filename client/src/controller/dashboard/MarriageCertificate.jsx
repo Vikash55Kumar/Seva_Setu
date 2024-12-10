@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { generateReport } from "../../actions/adminAction";
 import { DownloadPDF } from "../report/DownloadPdf";
 import SpinnerLoader from "../../utility/SpinnerLoader";
+import { useLocation } from "react-router-dom";
 
 const socket = io(`${import.meta.env.VITE_SOCKET_URL}`);
 
@@ -20,10 +21,16 @@ const MetricCard = ({ title, value }) => (
 );
 
 
-export default function MerriageCertificate() {
+export default function MerriageCertificate({adminProfile = {}}) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
+  const { provider } = adminProfile || {}; 
+
+  const location = useLocation();
+  const title2 = location.state?.title;
+  const stateTitle = location.state?.stateTitle;
+  
   const totalForms = 2389;
   const pendingForms = 349;
   const processedForms = 1897;
@@ -39,10 +46,6 @@ export default function MerriageCertificate() {
   const title = "Forms Monitoring Dashboard Merriage Certificate"
 
   const formTitle = "Merriage Certificate"
-
-  const formTypesData= [
-    { name: 'Merriage Certificate', FormsReceived: 4200, PendingForms: 2240, ProcessedForms: 2879, RecjectedForms: 81 },
-  ];
 
   //Linear Total
   const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May']
@@ -114,7 +117,7 @@ export default function MerriageCertificate() {
 
   return (
     <div className="report">
-      <h1>Revenue Depertment Rajasthan</h1>
+      <h1>Revenue Depertment {stateTitle}</h1>
 
       <div className="dashboard">
         <h2>{title}</h2>
@@ -128,29 +131,27 @@ export default function MerriageCertificate() {
         </div>
         <div className="chart-container2">
           <Bar data={chartData} options={chartOptions} />
+          { provider=="Officer" ? 
           <div className="buttons">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleGenerateReport}
-            >
+            <button type="button" className="btn btn-primary" onClick={handleGenerateReport} > 
               Generate Report
             </button>
             <br />
             <br />
             {loading ? (
             <SpinnerLoader />
-          ) : (
-            <button type="button" className="btn btn-success" onClick={handleDownloadPDF}>
-              Download Report
-            </button>
-          )}
-          </div>
+            ) : (
+              <button type="button" className="btn btn-success" onClick={handleDownloadPDF}>
+                Download Report
+              </button>
+            )}
+          </div> : ""}
+          
         </div>
       </div>
 
       <section className="overview">
-        <LinearTotal labels={labels} data={data} labelsName={labelsName} />
+        <LinearTotal labels={labels} data={data} labelsName={labelsName} title2={title2}/>
       </section>
 
       <br/><br/><br/><br/><br/><br/>

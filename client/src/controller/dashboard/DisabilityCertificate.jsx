@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { generateReport } from "../../actions/adminAction";
 import { DownloadPDF } from "../report/DownloadPdf";
 import SpinnerLoader from "../../utility/SpinnerLoader";
+import { useLocation } from "react-router-dom";
 
 const socket = io(`${import.meta.env.VITE_SOCKET_URL}`);
 
@@ -19,10 +20,17 @@ const MetricCard = ({ title, value }) => (
   </div>
 );
 
-export default function DisabilityCertificate() {
+export default function DisabilityCertificate({adminProfile = {}}) {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+
+  const { provider } = adminProfile || {}; 
+
+
+  const location = useLocation();
+  const title2 = location.state?.title;
+  const stateTitle = location.state?.stateTitle;
 
   const totalForms = 1219;
   const pendingForms = 290;
@@ -111,7 +119,7 @@ export default function DisabilityCertificate() {
   return (
     <div className="report">
 
-      <h1>Revenue Depertment Rajasthan</h1>
+      <h1>Revenue Depertment {stateTitle}</h1>
 
       <div className="dashboard">
         <h2>{title}</h2>
@@ -125,29 +133,26 @@ export default function DisabilityCertificate() {
         </div>
         <div className="chart-container2">
           <Bar data={chartData} options={chartOptions} />
+          { provider=="Officer" ? 
           <div className="buttons">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleGenerateReport}
-            >
+            <button type="button" className="btn btn-primary" onClick={handleGenerateReport} > 
               Generate Report
             </button>
             <br />
             <br />
             {loading ? (
             <SpinnerLoader />
-          ) : (
-            <button type="button" className="btn btn-success" onClick={handleDownloadPDF}>
-              Download Report
-            </button>
-          )}
-          </div>
+            ) : (
+              <button type="button" className="btn btn-success" onClick={handleDownloadPDF}>
+                Download Report
+              </button>
+            )}
+          </div> : ""}
         </div>
       </div>
 
       <section className="overview">
-        <LinearTotal labels={labels} data={data} labelsName={labelsName} />
+        <LinearTotal labels={labels} data={data} labelsName={labelsName} title2={title2} />
       </section>
 
       <br/><br/><br/><br/><br/><br/>

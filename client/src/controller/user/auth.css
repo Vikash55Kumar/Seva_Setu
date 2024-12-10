@@ -60,6 +60,12 @@
     font-weight: 600;
 
 }
+.logoDas {
+    margin-left: 10rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    height: 4rem;
+}
 
 /* .form {
     display: flex;

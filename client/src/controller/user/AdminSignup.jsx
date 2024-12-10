@@ -59,7 +59,6 @@ export default function AdminSignup() {
             console.log("error 2 ", errorMessage);
             toast.error(errorMessage, 'error');
         }
-
     };
 
     // const handleGoogleLogin = () => {
@@ -77,7 +76,7 @@ export default function AdminSignup() {
           <SpinnerLoader /> 
       ) : (
         <>
-          <h2>Admin SignUp on SevaSetu</h2>
+          <h2>Officer SignUp on SevaSetu</h2>
             <h4 className="mt-2 mb-3">Have an account? <a href="/login">Log In</a></h4>
             <div id="auth-account">
                {/* <a onClick={handleGoogleLogin}>

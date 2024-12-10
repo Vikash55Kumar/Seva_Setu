@@ -9,8 +9,6 @@ import Footer from './controller/footer/Footer';
 // import HomePage from './controller/homePage/HomePage';
 
 import TermService from './controller/term/TermService';
-// import PrivacyPolicy from './controller/term/PrivacyPolicy';
-
 import Dashboard from './controller/dashboard/Dashboard';
 import Certificate from './controller/certificate/Certificate';
 import Contact from './controller/contact/Contact';
@@ -39,7 +37,8 @@ import BirthCertificate from './controller/dashboard/BirthCertificate';
 import { getAdminDetails, getReport, loadAdmin } from './actions/adminAction';
 import AdminLogin from './controller/user/AdminLogin';
 import ReporList from './controller/report/ReportList';
-import ReportPdf from './controller/report/ReportPdf';
+import ReportDashboard from './controller/report/ReportDashboard';
+import PrivacyPolicy from './controller/term/PrivacyPolicy';
 // import ReportPdf from './controller/report/ReportPdf';
 
 
@@ -86,10 +85,10 @@ function App() {
       {/* <SpinnerLoader /> */}
       <SocketProvider>
         <Router>
-          <Navbar />
+          <Navbar adminProfile={admin?.data || null} />
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <UserLogin /> } />
+            <Route path='/dashboard' element={isAuthenticated ? <Dashboard adminProfile={admin?.data || null} /> : <UserLogin /> } />
             <Route path='/certificate' element={isAuthenticated ? <Certificate /> : <UserLogin />} />
             <Route path='/certificateForm' element={<CertificateForm />} />
             <Route path='/profile'  element={<Profile profile={user?.data || null} adminProfile={admin?.data || null} />}/>
@@ -101,18 +100,18 @@ function App() {
             <Route path="/google-login" element={<GoogleLogin />} />
             <Route path='/forgot' element={<ForgotPassword /> } />
             <Route path='/term' element={<TermService />} />
-            {/* <Route path='/privacy' element={<PrivacyPolicy />} /> */}
-            <Route path='/casteCertificate' element={<CastCertificate />} />
-            <Route path='/incomeCertificate' element={<IncomeCertificate />} />
-            <Route path='/merriageCertificate' element={ <MerriageCertificate /> } />
-            <Route path='/seniorcitizenCertificate' element={ <SeniorcitizenCertificate /> } />
-            <Route path='/rationcardCertificate' element={ <RationcardCertificate /> } />
-            <Route path='/disabilityCertificate' element={ <DisabilityCertificate /> } />
-            <Route path='/characterCertificate' element={ <CharacterCertificate /> } />
-            <Route path='/birthCertificate' element={ <BirthCertificate /> } />
-            <Route path='/residentialCertificate' element={ <ResidentialCertificate /> } />
+            <Route path='/privacy' element={<PrivacyPolicy />} />
+            <Route path='/casteCertificate' element={<CastCertificate adminProfile={admin?.data || null} />} />
+            <Route path='/incomeCertificate' element={<IncomeCertificate adminProfile={admin?.data || null} />} />
+            <Route path='/merriageCertificate' element={ <MerriageCertificate adminProfile={admin?.data || null} /> } />
+            <Route path='/seniorcitizenCertificate' element={ <SeniorcitizenCertificate adminProfile={admin?.data || null} /> } />
+            <Route path='/rationcardCertificate' element={ <RationcardCertificate adminProfile={admin?.data || null} /> } />
+            <Route path='/disabilityCertificate' element={ <DisabilityCertificate adminProfile={admin?.data || null} /> } />
+            <Route path='/characterCertificate' element={ <CharacterCertificate adminProfile={admin?.data || null} /> } />
+            <Route path='/birthCertificate' element={ <BirthCertificate adminProfile={admin?.data || null} /> } />
+            <Route path='/residentialCertificate' element={ <ResidentialCertificate adminProfile={admin?.data || null} /> } />
             <Route path='/reportList' element={<ReporList title={title} />} />
-            <Route path='/reportPdf' element={<ReportPdf />} />
+            <Route path="/reportDashboard" element={<ReportDashboard adminProfile={admin?.data || null} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

@@ -13,6 +13,7 @@ export default function UserSignup() {
     const nevigate = useNavigate()
 
     const [name, setName] = useState('');
+    const [employeeId, setEmployeeId] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [conformPassword, setConformPassword] = useState('');
@@ -27,6 +28,7 @@ export default function UserSignup() {
         const myForm = new FormData();
 
         myForm.append("fullName", name);
+        myForm.append("employeeId", employeeId);
         myForm.append("email", email);
         myForm.append("password", password);
         myForm.append("conformPassword", conformPassword); 
@@ -42,6 +44,7 @@ export default function UserSignup() {
                 toast.success(successMessage, 'success');
                 // clear form
                 setName('');
+                setEmployeeId('');
                 setEmail('');
                 setPassword('');
                 setConformPassword('');
@@ -98,6 +101,17 @@ export default function UserSignup() {
                   placeholder="* Enter Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group-2">
+                <label htmlFor="employeeId">Employee Id:</label>
+                <input
+                  type="employeeId"
+                  id="employeeId"
+                  placeholder="* Enter Employee Id"
+                  value={employeeId}
+                  onChange={(e) => setEmployeeId(e.target.value)}
                   required
                 />
               </div>

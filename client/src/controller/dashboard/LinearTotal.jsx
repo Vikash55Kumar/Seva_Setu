@@ -2,7 +2,7 @@ import React from 'react'
 import { Line } from 'react-chartjs-2';
 import "./LinearTotal.css"
 
-export default function LinearTotal({labels=[], labelsName, data = []}) {
+export default function LinearTotal({labels=[], labelsName, data = [], title2}) {
 
     const lineData = {
         // labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -33,7 +33,7 @@ export default function LinearTotal({labels=[], labelsName, data = []}) {
         <section className="overview">
             <h2 className="overview-title">Monthly Overview</h2>
             <p className="overview-description" style={{textAlign:"center"}}>
-                Certificate issuance status across Jodhpur.
+                Certificate issuance status across {title2}.
             </p>
             <div className="chart-container">
                 <Line

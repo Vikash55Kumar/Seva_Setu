@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import googleImg from "../../assets/google.png";
 import { toast } from 'react-toastify';
 import SpinnerLoader from '../../utility/SpinnerLoader';
+import logo from "../../assets/logo.png"
 
 export default function UserLogin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const [employeeId, setEmployeeId] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false); // Loading state to manage spinner visibility
 
@@ -19,15 +20,15 @@ export default function UserLogin() {
         setLoading(true); // Show spinner when login starts
         
         const myForm = {
-            email,
+            employeeId,
             password
         };
         
         try {
             const response = await dispatch(login(myForm));
             if (response.status === 200) {
-                toast.success("Login Successfully!");
-                setEmail('');
+                toast.success("Employee Login Successfully!");
+                setEmployeeId('');
                 setPassword('');
                 setLoading(false); // Hide spinner after successful login
                 navigate("/");
@@ -41,11 +42,11 @@ export default function UserLogin() {
         }
     };
 
-    const handleGoogleLogin = () => {
-        setLoading(true);
-        // window.location.href = 'https://seva-setu.onrender.com/api/v1/users/auth/google';
-        window.location.href=`${import.meta.env.VITE_GOOGLE_URL}`
-    };
+    // const handleGoogleLogin = () => {
+    //     setLoading(true);
+    //     // window.location.href = 'https://seva-setu.onrender.com/api/v1/users/auth/google';
+    //     window.location.href=`${import.meta.env.VITE_GOOGLE_URL}`
+    // };
 
     return (
         <div className="account-set-main">
@@ -54,27 +55,30 @@ export default function UserLogin() {
                     <SpinnerLoader /> // Show spinner if loading is true
                 ) : (
                     <>
-                        <h2>Login on SevaSetu</h2>
-                        <h4 className="mt-2 mb-3">Don't have an account? <a href="/signup">Sign Up</a></h4>
-
                         <div id="auth-account">
+                            <img src={logo} className="logoDas" alt="Logo" />
+                        </div>
+
+                        <h3>Employee Login on SevaSetu</h3>
+
+                        {/* <div id="auth-account">
                             <a onClick={handleGoogleLogin}>
                                 <img src={googleImg} alt="Google Icon" />
                                 <div>Continue with Google</div>
                             </a>
 
                             <p className="mt-2">—— <b>Or</b> ——</p>
-                        </div>
+                        </div> */}
 
                         <form onSubmit={handleLogin}>
                             <div className="form-group-2">
-                                <label htmlFor="email">Email:</label>
+                                <label htmlFor="employeeId">Employee Id:</label>
                                 <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="* Enter email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="employeeId"
+                                    id="employeeId"
+                                    placeholder="* Enter employeeId"
+                                    value={employeeId}
+                                    onChange={(e) => setEmployeeId(e.target.value)}
                                     required
                                 />
                             </div>
