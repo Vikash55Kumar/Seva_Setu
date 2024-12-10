@@ -70,20 +70,20 @@ const generateAccessAndRefreshTokens = async (adminId) => {
 
 
 const registerAdmin = asyncHandler(async (req, res) => {
-    const { fullName, email, password, conformPassword } = req.body;
+    const { fullName, email, officerId, password, conformPassword } = req.body;
 
-    console.log(fullName, email, password, conformPassword);
+    console.log(fullName, email, officerId, password, conformPassword);
 
-    if ([fullName, email, password, conformPassword].some((field) => field?.trim() === "")) {
+    if ([fullName, email, officerId, password, conformPassword].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required");
     }
 
     const existedAdmin = await Admin.findOne({
-        $or: [ { email }]
+        $or: [ { email, officerId }]
     });
 
     if (existedAdmin) {
-        throw new ApiError(409, "Admin with email or phoneNumber already exists");
+        throw new ApiError(409, "Admin with officerId or phoneNumber already exists");
     }
   
     const avatarLocalPath = req.files?.avatar[0]?.path;
@@ -105,9 +105,10 @@ const registerAdmin = asyncHandler(async (req, res) => {
     const admin = await Admin.create({
         fullName,
         email,
+        officerId,
         password,
         avatar: avatar.url,
-        provider: 'admin',
+        provider: 'Officer',
     });
 
     const createdAdmin = await Admin.findById(admin._id).select("-password -refreshToken");
@@ -145,10 +146,10 @@ const logoutAdmin = asyncHandler( async (req, res) => {
 })
 
 const loginAdmin = asyncHandler( async(req, res) => {
-    const { email, password } = req.body;
+    const { officerId, password } = req.body;
 
     try {
-        const admin = await Admin.findOne({ email });
+        const admin = await Admin.findOne({ officerId });
 
         if (!admin) {
             return res.status(400).json({ message: "Admin not found" });
@@ -255,7 +256,7 @@ const getCurrentAdmin = asyncHandler(async(req, res) => {
 })
 
 const getAdminDetails = asyncHandler(async (req, res) => {
-    const admin = await Admin.findOne().select("-password -email");
+    const admin = await Admin.findOne().select("-password -officerId");
     
     if (!admin) {
         return res.status(404).json(new ApiError(404, "admin not found"));
@@ -265,16 +266,16 @@ const getAdminDetails = asyncHandler(async (req, res) => {
 });
 
 const updateAccountDetails = asyncHandler( async(req, res) => {
-    const {phoneNumber, email} = req.body
+    const {phoneNumber, officerId} = req.body
 
-    if(!phoneNumber || !email) {
-        throw new ApiError(400, "required email or phoneNumber")
+    if(!phoneNumber || !officerId) {
+        throw new ApiError(400, "required officerId or phoneNumber")
     }
 
     const  admin = await Admin.findByIdAndUpdate(req.admin?._id, {
         $set: {
             phoneNumber:phoneNumber,
-            email:email
+            officerId:officerId
         }
     }, {new:true}
 
@@ -282,7 +283,7 @@ const updateAccountDetails = asyncHandler( async(req, res) => {
 
     return res
     .status(200)
-    .json(new ApiResponse(200, admin, "phoneNumber or email updated successfull"))
+    .json(new ApiResponse(200, admin, "phoneNumber or officerId updated successfull"))
 
 })
 

@@ -20,8 +20,8 @@ SocketHandler(server);
 
 // CORS Setup
 app.use(cors({
-  // origin: "http://localhost:5173",
-  origin: process.env.CORES_ORIGIN || "https://seva-setu.netlify.app" || "https://localhost:5173",
+  origin: "http://localhost:5173",
+  // origin: process.env.CORES_ORIGIN || "https://seva-setu.netlify.app" || "https://localhost:5173",
   methods: 'DELETE, POST, GET, PUT',
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'], 
   credentials: true,
@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 const __dirname = path.resolve();
 
 const buildPath = path.join(__dirname, '../../client/dist');
-console.log('Build Path:', buildPath);
+// console.log('Build Path:', buildPath);
 // console.log('Files in Build Path:', fs.readdirSync(buildPath));
 
 app.use(express.static(buildPath)); 

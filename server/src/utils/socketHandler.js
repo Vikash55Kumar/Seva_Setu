@@ -61,7 +61,7 @@
 //       // Simulate dynamic updates for form statistics
 //       formData = formData.map(form => {
 //         form.FormsReceived += Math.floor(Math.random() * 10);  // Randomly increase FormsReceived
-//         form.PendingForms = Math.max(0, form.PendingForms + Math.floor(Math.random() * 5 - 2)); // Random updates to pending forms
+//         form.PendingForms = Math.min(form.PendingForms + Math.floor(Math.random() * 3)); // Random updates to pending forms
 //         form.ProcessedForms = Math.min(form.FormsReceived, form.ProcessedForms + Math.floor(Math.random() * 5)); // Processed forms
 //         form.rejectedForms = Math.min(form.FormsReceived, form.rejectedForms + Math.floor(Math.random() * 2)); // Rejected forms
 //         return form;
@@ -170,8 +170,8 @@ cron.schedule('0 */12 * * *', () => {
 export function SocketHandler(server) {
   const io = new Server(server, {
     cors: {
-      origin: process.env.CORS_ORIGIN || "https://seva-setu.netlify.app",
-      // origin: "http://localhost:5173", // Update with your frontend's URL
+      // origin: process.env.CORS_ORIGIN || "https://seva-setu.netlify.app",
+      origin: "http://localhost:5173", // Update with your frontend's URL
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true,
     },
@@ -207,7 +207,7 @@ export function SocketHandler(server) {
       // Update form statistics
       formStatistics = {
         totalForms: formStatistics.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, formStatistics.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(formStatistics.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(formStatistics.totalForms, formStatistics.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(formStatistics.totalForms, formStatistics.rejectedForms + Math.floor(Math.random() * 2)),
       };
@@ -215,7 +215,7 @@ export function SocketHandler(server) {
       // Update form data
       formData = formData.map(form => {
         form.FormsReceived += Math.floor(Math.random() * 10);
-        form.PendingForms = Math.max(0, form.PendingForms + Math.floor(Math.random() * 5 - 2));
+        form.PendingForms = Math.min(form.PendingForms + Math.floor(Math.random() * 3));
         form.ProcessedForms = Math.min(form.FormsReceived, form.ProcessedForms + Math.floor(Math.random() * 5));
         form.rejectedForms = Math.min(form.FormsReceived, form.rejectedForms + Math.floor(Math.random() * 2));
         return form;
@@ -225,61 +225,61 @@ export function SocketHandler(server) {
       // Update Certificate Form Data
       castData = {
         totalForms: castData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, castData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(castData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(castData.totalForms, castData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(castData.totalForms, castData.rejectedForms + Math.floor(Math.random() * 2)),
       };
       birthData = {
         totalForms: birthData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, birthData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(birthData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(birthData.totalForms, birthData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(birthData.totalForms, birthData.rejectedForms + Math.floor(Math.random() * 2)),
       }; 
       characterData = {
         totalForms: characterData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, characterData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(characterData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(characterData.totalForms, characterData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(characterData.totalForms, characterData.rejectedForms + Math.floor(Math.random() * 2)),
       }; 
       disabilityData = {
         totalForms: disabilityData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, disabilityData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(disabilityData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(disabilityData.totalForms, disabilityData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(disabilityData.totalForms, disabilityData.rejectedForms + Math.floor(Math.random() * 2)),
       }; 
       incomeData = {
         totalForms: incomeData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, incomeData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(incomeData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(incomeData.totalForms, incomeData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(incomeData.totalForms, incomeData.rejectedForms + Math.floor(Math.random() * 2)),
       };
       incomeData = {
         totalForms: incomeData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, incomeData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(incomeData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(incomeData.totalForms, incomeData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(incomeData.totalForms, incomeData.rejectedForms + Math.floor(Math.random() * 2)),
       };      
       marrageData = {
         totalForms: marrageData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, marrageData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(marrageData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(marrageData.totalForms, marrageData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(marrageData.totalForms, marrageData.rejectedForms + Math.floor(Math.random() * 2)),
       };      
       rationData = {
         totalForms: rationData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, rationData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(rationData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(rationData.totalForms, rationData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(rationData.totalForms, rationData.rejectedForms + Math.floor(Math.random() * 2)),
       };      
       residentialData = {
         totalForms: residentialData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, residentialData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(residentialData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(residentialData.totalForms, residentialData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(residentialData.totalForms, residentialData.rejectedForms + Math.floor(Math.random() * 2)),
       };
       seniorData = {
         totalForms: seniorData.totalForms + Math.floor(Math.random() * 10),
-        pendingForms: Math.max(0, seniorData.pendingForms + Math.floor(Math.random() * 5 - 2)),
+        pendingForms: Math.min(seniorData.pendingForms + Math.floor(Math.random() * 3)),
         processedForms: Math.min(seniorData.totalForms, seniorData.processedForms + Math.floor(Math.random() * 5)),
         rejectedForms: Math.min(seniorData.totalForms, seniorData.rejectedForms + Math.floor(Math.random() * 2)),
       };
@@ -413,7 +413,7 @@ export function SocketHandler(server) {
 //       // Simulate dynamic updates for form statistics
 //       formData = formData.map(form => {
 //         form.FormsReceived += Math.floor(Math.random() * 10);  // Randomly increase FormsReceived
-//         form.PendingForms = Math.max(0, form.PendingForms + Math.floor(Math.random() * 5 - 2)); // Random updates to pending forms
+//         form.PendingForms = Math.min(form.PendingForms + Math.floor(Math.random() * 3)); // Random updates to pending forms
 //         form.ProcessedForms = Math.min(form.FormsReceived, form.ProcessedForms + Math.floor(Math.random() * 5)); // Processed forms
 //         form.rejectedForms = Math.min(form.FormsReceived, form.rejectedForms + Math.floor(Math.random() * 2)); // Rejected forms
 //         return form;

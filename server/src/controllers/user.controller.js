@@ -71,20 +71,20 @@ const googleAuth = asyncHandler(async (req, res) => {
 
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { fullName, email, phoneNumber, password, conformPassword } = req.body;
+    const { fullName, email, employeeId, phoneNumber, password, conformPassword } = req.body;
 
-    console.log(fullName, email, phoneNumber, password, conformPassword);
+    console.log(fullName, email, employeeId, phoneNumber, password, conformPassword);
 
-    if ([fullName, email, phoneNumber, password, conformPassword].some((field) => field?.trim() === "")) {
+    if ([fullName, email, employeeId, phoneNumber, password, conformPassword].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required");
     }
 
     const existedUser = await User.findOne({
-        $or: [{ phoneNumber }, { email }]
+        $or: [{ phoneNumber }, { employeeId }]
     });
 
     if (existedUser) {
-        throw new ApiError(409, "User with email or phoneNumber already exists");
+        throw new ApiError(409, "Employee with employeeId or phoneNumber already exists");
     }
   
     const avatarLocalPath = req.files?.avatar[0]?.path;
@@ -106,10 +106,11 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         fullName,
         email,
+        employeeId,
         password,
         avatar: avatar.url,
         phoneNumber,
-        provider: 'local',
+        provider: 'Employee',
     });
 
     const createdUser = await User.findById(user._id).select("-password -refreshToken");
@@ -147,10 +148,10 @@ const logoutUser = asyncHandler( async (req, res) => {
 })
 
 async function loginUser(req, res) {
-    const { email, password } = req.body;
+    const { employeeId, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ employeeId });
 
         if (!user) {
             return res.status(400).json({ message: "User not found" });
@@ -257,7 +258,7 @@ const getCurrentUser = asyncHandler(async(req, res) => {
 })
 
 const getUserDetails = asyncHandler(async (req, res) => {
-    const user = await User.findOne().select("-password -email");
+    const user = await User.findOne().select("-password -employeeId");
     
     if (!user) {
         return res.status(404).json(new ApiError(404, "User not found"));
@@ -267,16 +268,16 @@ const getUserDetails = asyncHandler(async (req, res) => {
 });
 
 const updateAccountDetails = asyncHandler( async(req, res) => {
-    const {phoneNumber, email} = req.body
+    const {phoneNumber, employeeId} = req.body
 
-    if(!phoneNumber || !email) {
-        throw new ApiError(400, "required email or phoneNumber")
+    if(!phoneNumber || !employeeId) {
+        throw new ApiError(400, "required employeeId or phoneNumber")
     }
 
     const  user = await User.findByIdAndUpdate(req.user?._id, {
         $set: {
             phoneNumber:phoneNumber,
-            email:email
+            employeeId:employeeId
         }
     }, {new:true}
 
@@ -284,90 +285,9 @@ const updateAccountDetails = asyncHandler( async(req, res) => {
 
     return res
     .status(200)
-    .json(new ApiResponse(200, user, "phoneNumber or email updated successfull"))
+    .json(new ApiResponse(200, user, "phoneNumber or employeeId updated successfull"))
 
 })
-
-// const updateUserAvatar = asyncHandler(async (req, res) => {
-//     const user= await User.findById(req.user?._id)
-//     const imageLocalPath = req.file?.path
-
-//     const currentAvatarUrl = user.avatar;
-
-//     // Extract publicId from URL
-//     const publicIdMatch = currentAvatarUrl.match(/\/v\d+\/([^\/]+)\.[a-z]{3,4}$/i);
-//     if (!publicIdMatch) {
-//         throw new ApiError(400, "Invalid avatar URL format");
-//     }
-
-//     const publicId = publicIdMatch[1];
-//     const deletionSuccessful = await deleteFromCloudinary(publicId);
-
-//     if (!deletionSuccessful) {
-//         throw new ApiError(500, "Error deleting old avatar");
-//     }
-
-//     const avatar=await uploadOnCloudinary(avatarLocalPath)
-
-//     if(!avatar.url) {
-//         throw new ApiError(400, "error while uploading avatar")
-//     }
-
-//     const updateAwatar= await User.findByIdAndUpdate(req.user?._id, {
-//         $set: {
-//             avatar:avatar.url
-//         }
-//     }, {new:true}
-//     ).select("-password") 
-
-//     return res
-//     .status(200)
-//     .json(new ApiResponse(200, updateAwatar, "Avatar update successfull"))
-
-// })
-
-// const updateUserCoverImage = asyncHandler(async (req, res) => {
-//     const coverLocalPath = req.file?.path
-//     const user= await User.findById(req.user?._id)
-
-//     const currentCoverImageUrl = user.coverImage;
-
-//     // Extract publicId from URL
-//     const coverPublicIdMatch = currentCoverImageUrl.match(/\/v\d+\/([^\/]+)\.[a-z]{3,4}$/i);
-//     if (!coverPublicIdMatch) {
-//         throw new ApiError(400, "Invalid coverImage URL format");
-//     }
-
-//     const publicId = coverPublicIdMatch[1];
-
-//     const deletionSuccessful = await deleteFromCloudinary(publicId);
-
-//     if (!deletionSuccessful) {
-//         throw new ApiError(500, "Error deleting old coverImage");
-//     }
-
-//     if(!coverLocalPath) {
-//         throw new ApiError(400, "CoverImage not found for update")
-//     }
-
-//     const coverImage=await uploadOnCloudinary(coverLocalPath)
-
-//     if(!coverImage.url) {
-//         throw new ApiError(400, "error while uploading coverImage")
-//     }
-
-//     const updateCoverImage= await User.findByIdAndUpdate(req.user?._id, {
-//         $set: {
-//             coverImage:coverImage.url
-//         }
-//     }, {new:true}
-//     ).select("-password") 
-
-//     return res
-//     .status(200)
-//     .json(new ApiResponse(200, updateCoverImage, "CoverImage update successfull"))
-
-// })
 
 
 

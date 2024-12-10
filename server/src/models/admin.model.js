@@ -17,6 +17,13 @@ const adminSchema = new mongoose.Schema(
             lowercase: true,
             trim: true,
         },
+        officerId: {
+            type: String,
+            required: true,
+            unique: true,
+            uppercase: true,
+            trim: true,
+        },
         password: {
             type: String,
             trim: true,
