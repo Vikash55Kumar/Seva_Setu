@@ -74,7 +74,7 @@ const Navbar = ({adminProfile = {}}) => {
                 <a href="/">Home</a>
                 
                 {isAuthenticated ? <a href="/profile">Profile</a> : ""}
-                { provider=="Officer" ? <a href="/reportDashboard">Report</a> : ""}
+                { provider=="Officer" ?  <a href="https://reportsemitraapp.rajasthan.gov.in/WebSrc/Reports/rpt_newemitra_app_status.jsp" target="_blank" rel="noopener noreferrer">Report</a> : ""}
 
                 <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
                     <a href="#!" className="dropdown-toggle" onClick={toggleDropdown}>
