@@ -73,7 +73,7 @@ const Navbar = ({adminProfile = {}}) => {
             <div className={`nav-links ${isNavOpen ? "active" : ""}`}>
                 <a href="/">Home</a>
                 {/* <a href="/casteForm" > certificate Form</a> */}
-                <a href="/formCertificate" > Form</a>
+                {/* <a href="/formCertificate" > Form</a> */}
                 
                 {isAuthenticated ? <a href="/profile">Profile</a> : ""}
                 { provider=="Officer" ?  <a href="https://reportsemitraapp.rajasthan.gov.in/WebSrc/Reports/rpt_newemitra_app_status.jsp" target="_blank" rel="noopener noreferrer">Report</a> : ""}
