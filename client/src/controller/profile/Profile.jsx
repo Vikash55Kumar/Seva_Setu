@@ -34,7 +34,7 @@ export default function Profile({profile = {}, adminProfile = {}}) {
                 {/* <img src={image?.url || 'default-image-url'} alt="Profile" /> */}
                 </div>
                 <div className="name">
-                  <h2>{fullName || 'Full Name Not Available'}</h2>
+                  <h2>{fullName || 'Full Name Not Available'} VVRD01123424</h2>
                   <h5>{email || 'Email Not Available'}</h5>
                 </div>
               </div>

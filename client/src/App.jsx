@@ -44,6 +44,9 @@ import User1Login from './controller/user/User1Login';
 import CasteCertificateForm from './controller/certificate/CasteFormCertificate';
 import Form from './controller/certificate/Form';
 import FormNavbar from './controller/certificate/FormNavbar';
+import CertificateDashboard from './controller/resourceDashboard/CertificateDashboard';
+import EmployCertificateDashboard from './controller/resourceDashboard/EmployCertificateDashboard';
+import FinalCertificate from './dwnCert/FinalCertificate';
 // import ReportPdf from './controller/report/ReportPdf';
 
 
@@ -72,6 +75,132 @@ function App() {
   const title = "Hello 1";
 
   // console.log(report);
+
+  const adminD = {
+    _id: "admin123",
+    fullName: "Admin User",
+    email: "admin@example.com",
+  };
+  
+  const districts = [
+    {
+      _id: "1",
+      name: "",
+      subdivisions: [
+        { _id: "1-1", name: "Subdivision A" },
+        { _id: "1-2", name: "Subdivision B" },
+      ],
+    },
+    {
+      _id: "2",
+      name: "District 2",
+      subdivisions: [
+        { _id: "2-1", name: "Subdivision C" },
+        { _id: "2-2", name: "Subdivision D" },
+      ],
+    },
+  ];
+  
+  const cases = [
+    {
+      _id: "case1",
+      certificateType: "Birth",
+      allocation: "5",
+      totalCertificate: "50",
+      pendingCertificate: "10",
+      doneCertificate: "40",
+      freeResource: "2",
+      subdivisionId: "1-1",
+    },
+    {
+      _id: "case2",
+      certificateType: "Caste",
+      allocation: "3",
+      totalCertificate: "30",
+      pendingCertificate: "5",
+      doneCertificate: "25",
+      freeResource: "10",
+      subdivisionId: "1-2",
+    },
+    {
+      _id: "case3",
+      certificateType: "Income",
+      allocation: "4",
+      totalCertificate: "40",
+      pendingCertificate: "15",
+      doneCertificate: "25",
+      freeResource: "2",
+      subdivisionId: "2-1",
+    },
+    {
+      _id: "case4",
+      certificateType: "Residence",
+      allocation: "6",
+      totalCertificate: "60",
+      pendingCertificate: "20",
+      doneCertificate: "40",
+      freeResource: "3",
+      subdivisionId: "2-2",
+    },
+  ];
+
+  const states = [
+    {
+      _id: "state1",
+      name: "Delhi",
+      districts: [
+        {
+          _id: "district1",
+          name: "South East",
+          subdivisions: [
+            { _id: "subdivision1", name: "Subdivision 1" },
+            { _id: "subdivision2", name: "Subdivision 2" },
+          ],
+        },
+        {
+          _id: "district2",
+          name: "North-East",
+          subdivisions: [
+            { _id: "subdivision3", name: "Subdivision 3" },
+            { _id: "subdivision4", name: "Subdivision 4" },
+          ],
+        },
+
+        {
+          _id: "district1",
+          name: "South-West",
+          subdivisions: [
+            { _id: "subdivision1", name: "Subdivision 1" },
+            { _id: "subdivision2", name: "Subdivision 2" },
+          ],
+        },
+
+        {
+          _id: "district1",
+          name: "West",
+          subdivisions: [
+            { _id: "subdivision1", name: "Subdivision 1" },
+            { _id: "subdivision2", name: "Subdivision 2" },
+          ],
+        },
+      ],
+    },
+    // {
+    //   _id: "state2",
+    //   name: "State B",
+    //   districts: [
+    //     {
+    //       _id: "district3",
+    //       name: "District 3",
+    //       subdivisions: [
+    //         { _id: "subdivision5", name: "Subdivision 5" },
+    //         { _id: "subdivision6", name: "Subdivision 6" },
+    //       ],
+    //     },
+    //   ],
+    // },
+  ];
+  
   
 
   return (
@@ -123,6 +252,19 @@ function App() {
             <Route path='/residentialCertificate' element={ <ResidentialCertificate adminProfile={admin?.data || null} /> } />
             <Route path='/reportList' element={<ReporList title={title} />} />
             <Route path="/reportDashboard" element={<ReportDashboard adminProfile={admin?.data || null} />} />
+
+
+            <Route path='/dwn' element={<FinalCertificate />} />
+
+            <Route path='/certificateDashboard' element={<CertificateDashboard admin={adminD} states={states} districts={districts} cases={cases} /> } />
+
+            <Route path='/EmployCertificateDashboard' element={<EmployCertificateDashboard admin={adminD} states={states} districts={districts} cases={cases} /> } />
+
+
+
+
+
+
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

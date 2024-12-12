@@ -68,7 +68,7 @@ const EmployeeProgress = ({ profile = {}, adminProfile = {} }) => {
         <h2>Details of Employees</h2>
         <div className="profile-container">
           <div className="menu">
-            <h2>{fullName || 'Full Name Not Available'}</h2>
+            <h2>{fullName || 'Full Name Not Available'} </h2>
             <div className="button">Task Status</div>
             <div className="button"><a href='/profile'>Profile Info</a></div>
             <div className="button">Edit Details</div>
@@ -82,7 +82,7 @@ const EmployeeProgress = ({ profile = {}, adminProfile = {} }) => {
                   <img src={avatar} alt="Profile" />
                 </div>
                 <div className="name">
-                  <h2>{fullName || 'Full Name Not Available'}</h2>
+                  <h2>{fullName || 'Full Name Not Available'} VVRD01123424</h2>
                   <h5>{email || 'Email Not Available'}</h5>
                 </div>
               </div>
