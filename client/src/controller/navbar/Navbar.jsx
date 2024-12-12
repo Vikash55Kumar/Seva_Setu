@@ -72,6 +72,8 @@ const Navbar = ({adminProfile = {}}) => {
             
             <div className={`nav-links ${isNavOpen ? "active" : ""}`}>
                 <a href="/">Home</a>
+                {/* <a href="/casteForm" > certificate Form</a> */}
+                <a href="/formCertificate" > Form</a>
                 
                 {isAuthenticated ? <a href="/profile">Profile</a> : ""}
                 { provider=="Officer" ?  <a href="https://reportsemitraapp.rajasthan.gov.in/WebSrc/Reports/rpt_newemitra_app_status.jsp" target="_blank" rel="noopener noreferrer">Report</a> : ""}
@@ -82,6 +84,19 @@ const Navbar = ({adminProfile = {}}) => {
                     </a>
                     {isDropdownOpen && (
                         <div className="dropdown-menu">
+                            {/* Delhi */}
+                            <a href="#!" className="dropdown-toggle" onClick={toggleSubDropdown2}>
+                                Delhi
+                            </a>
+                            {isSubDropdownOpen2 && (
+                                <div className="dropdown-menu nested-dropdown">
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "North-East", "Delhi")}>North-East</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "North", "Delhi")}>North</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "South-West", "Delhi")}>South-West</a>
+                                    <a onClick={(e) => handleNavigation(e, "/certificate", "West", "Delhi")}>West</a>
+                                </div>
+                            )}
+                            
                             <a href="#!" className="dropdown-toggle" onClick={toggleSubDropdown}>
                                 Rajasthan
                             </a>
@@ -94,18 +109,7 @@ const Navbar = ({adminProfile = {}}) => {
                                 </div>
                             )}
 
-                            {/* Delhi */}
-                            <a href="#!" className="dropdown-toggle" onClick={toggleSubDropdown2}>
-                                Delhi
-                            </a>
-                            {isSubDropdownOpen2 && (
-                                <div className="dropdown-menu nested-dropdown">
-                                    <a onClick={(e) => handleNavigation(e, "/certificate", "North", "Delhi")}>North</a>
-                                    <a onClick={(e) => handleNavigation(e, "/certificate", "North-East", "Delhi")}>North-East</a>
-                                    <a onClick={(e) => handleNavigation(e, "/certificate", "South-West", "Delhi")}>South-West</a>
-                                    <a onClick={(e) => handleNavigation(e, "/certificate", "West", "Delhi")}>West</a>
-                                </div>
-                            )}
+
                         </div>
                     )}
                 </div>
@@ -120,7 +124,10 @@ const Navbar = ({adminProfile = {}}) => {
                             </>
                         ) : (
                             <>
+                                <a href="/user1Login">User Login</a>
+
                                 <a href="/login">Employee Login</a>
+                                
                                 <a href="/adminLogin">Officer Login</a>
                             </>
                         )}

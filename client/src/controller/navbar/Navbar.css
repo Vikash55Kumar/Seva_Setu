@@ -34,7 +34,7 @@
 .nav-links a {
     margin: 0 15px;
     text-decoration: none;
-    color: #0c6ade;
+    color: black;
     padding: 0.3rem;
     transition: color 0.3s ease-in-out;
 }
@@ -67,7 +67,7 @@
     align-items: center;
     position: absolute;
     top: 100%;
-    background-color: rgb(216, 221, 61, 0.9);
+    background-color:#aca3a3;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     flex-direction: column;
@@ -83,9 +83,12 @@
 }
 
 .dropdown-menu a:hover {
-    background-color: #10acea;
+    background-color: white;
+    border-radius: 1rem;
     cursor: pointer;
+
 }
+
 
 /* Show the dropdown menu when hovering over the Services link */
 .dropdown:hover .dropdown-menu {
@@ -187,16 +190,17 @@
     display: none;
     position: absolute;
     right: 0;
-    background-color: #343a40;
-    min-width: 160px;
+    background-color: #aca3a3;
+    height: 158px;
+    min-width: 190px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
 }
 
 .dropdown-content a {
-    color: rgb(110, 223, 36);
+    color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -204,5 +208,6 @@
 }
 
 .dropdown-content a:hover {
-    background-color: #495057;
+    background-color: white;
+    border-radius: 1rem;
 }

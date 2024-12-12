@@ -39,6 +39,11 @@ import AdminLogin from './controller/user/AdminLogin';
 import ReporList from './controller/report/ReportList';
 import ReportDashboard from './controller/report/ReportDashboard';
 import PrivacyPolicy from './controller/term/PrivacyPolicy';
+import FormCertificate from './controller/certificate/FormCertificate';
+import User1Login from './controller/user/User1Login';
+import CasteCertificateForm from './controller/certificate/CasteFormCertificate';
+import Form from './controller/certificate/Form';
+import FormNavbar from './controller/certificate/FormNavbar';
 // import ReportPdf from './controller/report/ReportPdf';
 
 
@@ -91,6 +96,8 @@ function App() {
             <Route path='/dashboard' element={isAuthenticated ? <Dashboard adminProfile={admin?.data || null} /> : <UserLogin /> } />
             <Route path='/certificate' element={isAuthenticated ? <Certificate /> : <UserLogin />} />
             <Route path='/certificateForm' element={<CertificateForm />} />
+            <Route path='/formCertificate' element={<FormCertificate />} />
+
             <Route path='/profile'  element={<Profile profile={user?.data || null} adminProfile={admin?.data || null} />}/>
             <Route path='/employProgress' element={<EmployeeProgress profile={user?.data || null} adminProfile={admin?.data || null} /> } />
             <Route path='/contact' element={<Contact />} />
@@ -101,6 +108,10 @@ function App() {
             <Route path='/forgot' element={<ForgotPassword /> } />
             <Route path='/term' element={<TermService />} />
             <Route path='/privacy' element={<PrivacyPolicy />} />
+            <Route path='/user1Login' element={<User1Login />} />
+            <Route path='/formNavbar' element={<FormNavbar /> } />
+            <Route path='/form' element={<Form /> } />
+            <Route path='/casteForm' element={<CasteCertificateForm />} />
             <Route path='/casteCertificate' element={<CastCertificate adminProfile={admin?.data || null} />} />
             <Route path='/incomeCertificate' element={<IncomeCertificate adminProfile={admin?.data || null} />} />
             <Route path='/merriageCertificate' element={ <MerriageCertificate adminProfile={admin?.data || null} /> } />

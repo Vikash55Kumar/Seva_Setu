@@ -1,0 +1,94 @@
+/* Navbar Container */
+.formN {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6889a5;
+    padding: 10px 20px;
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Logo Section */
+  .formN-logo h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* Links Section */
+  .formN-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Dropdown Styles */
+  .dropdown {
+    position: relative;
+    outline: none;
+  }
+  
+  .dropdown-btn {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #aca3a3;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .dropdown-content a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 5px 0;
+  }
+  
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus .dropdown-content {
+    display: block;
+  }
+  
+  /* User Info Styles */
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
+  
+  /* UTR Info */
+  .utr-info {
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .formN {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .formN-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

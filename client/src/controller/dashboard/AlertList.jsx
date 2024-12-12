@@ -3,7 +3,7 @@ import './AlertList.css';
 
 
 const subdivisions = ["Caste Certficate", "Income Certificate", "Birth Certificate", "Character Certificate", "Disability Certificate", "Marraiage Certificate", "RationCard Certificate", "Residential Certificate", "SeniorCitizen Certificate"]
-const messageSub = ["Jodhpur", "Phalodi", "Shergarh", "Osian", "Piapar City", "Bilara", "Bhopalgarh", "Luni", "Balesar"]
+const messageSub = ["Chanakya Puri", "Delhi Cantt", "Vasant Vihar"]
 
 // Mock function to simulate receiving alerts
 const fetchAlerts = (callback) => {
