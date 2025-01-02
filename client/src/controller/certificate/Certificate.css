@@ -1,4 +1,4 @@
-.certificate {
+.certificate1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -7,7 +7,7 @@
     background-color: #1a171724;
 }
 
-.card {
+.card1 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,19 +21,19 @@
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.card a {
+.card1 a {
     text-decoration: none;
     font-size: 1.4rem;
     color: #0071eb;
     /* font-weight: bold; */
 }
 
-.card:hover {
+.card1:hover {
     transform: scale(1.1);
     background-color: rgb(74, 175, 237);
 
 }
-.card a:hover {
+.card1 a:hover {
     text-decoration: none;
     font-size: 1.4rem;
     color: #0c0f13;
@@ -46,27 +46,27 @@ h2 {
 }
 
 @media (max-width: 895px) {
-    .certificate {
+    .certificate1 {
         margin: 3rem;
     }
 }
 
 @media (max-width: 863px) {
-    .certificate {
+    .certificate1 {
         margin: 3rem;
     }
-    .card {
+    .card1 {
         width: 15rem;
         height: 5rem;
     }
 }
 
 @media (max-width: 703px) {
-    .certificate {
+    .certificate1 {
         margin-top: 0rem;
         /* margin: 4rem; */
     }
-    .card {
+    .card1 {
         width: 20rem;
         height: 6rem;
         margin: 1.1rem;
@@ -74,10 +74,10 @@ h2 {
 }
 
 @media (max-width: 500px) {
-    .certificate {
+    .certificate1 {
         margin: 0rem;
     }
-    .card {
+    .card1 {
         width: 20rem;
         height: 5rem;
         margin: 1rem;

@@ -91,6 +91,7 @@ export default function AdminLogin() {
                         </form>
                     </>
                 )}
+                <p>Testing purpose only: &nbsp; Id:-OIPR201 &nbsp; password:-officer</p>
             </div>
         </div>
     );

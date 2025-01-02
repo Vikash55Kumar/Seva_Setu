@@ -95,7 +95,7 @@ function EmployCertificateDashboard({ admin = {}, states = [], cases = [] }) {
 
       <div className={`sidebar ${showSidebar ? "show" : ""}`}>
         <div className="dashboard-menu">
-          <h2>Certificate Dashboard</h2>
+          <h2>Choose Certificate</h2>
 
           {/* State Selection */}
           <div className="menu-item">
@@ -171,22 +171,18 @@ function EmployCertificateDashboard({ admin = {}, states = [], cases = [] }) {
 
       {/* Main content area */}
       <div className={`main-content ${showSidebar ? "sidebar-open" : ""}`}>
-        <div className="header">
-          <div>
-            <span>Certificate Dashboard</span>
-            <span>
-              Welcome back, <b>VIKASH KUMAR || VVRD01123424</b>
-            </span>
-          </div>
-          <a href="">
+        <div className="head1">
+          <h1>Employee Resource  Dashboard</h1>
+          <div className="header">
+            <div>
+              <span >Welcome back, &nbsp; {fullName}</span>
+            </div>
             <img src={vik} alt="Profile" />
-          </a>
+          </div>
         </div>
 
-
-
-            {/* Table displaying cases in selected subdivision */}
-            <div className="case-info">
+      {/* Table displaying cases in selected subdivision */}
+        <div className="case-info">
           <h3>Cases in {selectedSubdivision || "N/A"}</h3>
         </div>
 
@@ -215,14 +211,10 @@ function EmployCertificateDashboard({ admin = {}, states = [], cases = [] }) {
             ))}
           </tbody>
         </table>
+        
+        <br />
+        <br />
 
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
         {/* Table displaying Region and Service Data when 'Caste' is selected */}
         {certificateType === "Caste" && (
           <div className="case-info">

@@ -72,18 +72,13 @@ const Navbar = ({adminProfile = {}}) => {
             
             <div className={`nav-links ${isNavOpen ? "active" : ""}`}>
                 <a href="/">Home</a>
-                {/* <a href="/casteForm" > certificate Form</a> */}
-                <a href="/certificateDashboard" > Certificate</a>
-                <a href="/EmployCertificateDashboard" >Employ  Certificate</a>
 
-                
+                { provider=="Officer" ? <a href="/certificateDashboard" > Admin Resource</a> : "" }
+                { provider=="Officer" ? <a href="/EmployCertificateDashboard" >Employ Report</a> : "" }
                 {isAuthenticated ? <a href="/profile">Profile</a> : ""}
-                { provider=="Officer" ?  <a href="https://reportsemitraapp.rajasthan.gov.in/WebSrc/Reports/rpt_newemitra_app_status.jsp" target="_blank" rel="noopener noreferrer">Report</a> : ""}
 
                 <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
-                    <a href="#!" className="dropdown-toggle" onClick={toggleDropdown}>
-                        Services
-                    </a>
+                    <a href="#!" className="dropdown-toggle" onClick={toggleDropdown}>Services</a>
                     {isDropdownOpen && (
                         <div className="dropdown-menu">
                             {/* Delhi */}

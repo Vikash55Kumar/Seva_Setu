@@ -15,6 +15,9 @@ export default function UserLogin() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false); // Loading state to manage spinner visibility
 
+    console.log(employeeId);
+    
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true); // Show spinner when login starts
@@ -66,7 +69,6 @@ export default function UserLogin() {
                                 <img src={googleImg} alt="Google Icon" />
                                 <div>Continue with Google</div>
                             </a>
-
                             <p className="mt-2">—— <b>Or</b> ——</p>
                         </div> */}
 
@@ -99,7 +101,9 @@ export default function UserLogin() {
                         </form>
                     </>
                 )}
+                <p>Testing purpose only: &nbsp; Id:-EMPD101 &nbsp; password:-vikash</p>
             </div>
+
         </div>
     );
 }

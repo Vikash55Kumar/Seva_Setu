@@ -57,8 +57,8 @@ import "./FormNavbar.css";
 const FormNavbar = ({ user, utrCode }) => {
   const certificates = [
     { name: "Caste Certificate", path: "/form" },
-    { name: "Income Certificate", path: "/apply-income-certificate" },
-    { name: "Domicile Certificate", path: "/apply-domicile-certificate" },
+    // { name: "Income Certificate", path: "/apply-income-certificate" },
+    // { name: "Domicile Certificate", path: "/apply-domicile-certificate" },
   ];
 
   return (
@@ -67,15 +67,16 @@ const FormNavbar = ({ user, utrCode }) => {
         <h2>OTR Portal</h2>
       </div>
 
-      <a href="/dwn" >Download Certificate</a>
-
       <div className="formN-links">
         {/* Dropdown for Certificate Types */}
         <div className="dropdown" tabIndex="0" aria-label="Apply for certificates">
-
-          <button className="dropdown-btn" aria-haspopup="true">
+        <a href="/dwn" className="dropdown-btn" aria-haspopup="true">
+            Download Certificate
+          </a>  
+          &nbsp; &nbsp; &nbsp;       
+          <a className="dropdown-btn" aria-haspopup="true">
             Apply for Certificate <span>&#9662;</span>
-          </button>
+          </a>
           <div className="dropdown-content">
             {certificates.map((cert) => (
               <Link key={cert.name} to={cert.path}>
@@ -85,19 +86,17 @@ const FormNavbar = ({ user, utrCode }) => {
           </div>
         </div>
 
-        {/* User Information */}
-        <div className="user-info">
-          <img
-            src={userImg || ""}
-            className="user-icon"
-          />
-          <span>{user?.name || "Guest"}</span>
-        </div>
-
         {/* Display UTR Code */}
         <div className="utr-info">
           <strong>OTR:</strong> <span>{utrCode || "Not Assigned"}</span>
         </div>
+
+        {/* User Information */}
+        <div className="user-info">
+          <img src={userImg || ""} className="user-icon" />
+          {/* <span>{user?.name || "Guest"}</span> */}
+        </div>
+
       </div>
     </nav>
   );

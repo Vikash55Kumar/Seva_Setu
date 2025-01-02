@@ -38,7 +38,7 @@ import { getAdminDetails, getReport, loadAdmin } from './actions/adminAction';
 import AdminLogin from './controller/user/AdminLogin';
 import ReporList from './controller/report/ReportList';
 import ReportDashboard from './controller/report/ReportDashboard';
-import PrivacyPolicy from './controller/term/PrivacyPolicy';
+// import PrivacyPolicy from './controller/term/PrivacyPolicy';
 import FormCertificate from './controller/certificate/FormCertificate';
 import User1Login from './controller/user/User1Login';
 import CasteCertificateForm from './controller/certificate/CasteFormCertificate';
@@ -226,7 +226,6 @@ function App() {
             <Route path='/certificate' element={isAuthenticated ? <Certificate /> : <UserLogin />} />
             <Route path='/certificateForm' element={<CertificateForm />} />
             <Route path='/formCertificate' element={<FormCertificate />} />
-
             <Route path='/profile'  element={<Profile profile={user?.data || null} adminProfile={admin?.data || null} />}/>
             <Route path='/employProgress' element={<EmployeeProgress profile={user?.data || null} adminProfile={admin?.data || null} /> } />
             <Route path='/contact' element={<Contact />} />
@@ -236,7 +235,7 @@ function App() {
             <Route path="/google-login" element={<GoogleLogin />} />
             <Route path='/forgot' element={<ForgotPassword /> } />
             <Route path='/term' element={<TermService />} />
-            <Route path='/privacy' element={<PrivacyPolicy />} />
+            {/* <Route path='/privacy' element={<PrivacyPolicy />} /> */}
             <Route path='/user1Login' element={<User1Login />} />
             <Route path='/formNavbar' element={<FormNavbar /> } />
             <Route path='/form' element={<Form /> } />
@@ -252,19 +251,9 @@ function App() {
             <Route path='/residentialCertificate' element={ <ResidentialCertificate adminProfile={admin?.data || null} /> } />
             <Route path='/reportList' element={<ReporList title={title} />} />
             <Route path="/reportDashboard" element={<ReportDashboard adminProfile={admin?.data || null} />} />
-
-
             <Route path='/dwn' element={<FinalCertificate />} />
-
             <Route path='/certificateDashboard' element={<CertificateDashboard admin={adminD} states={states} districts={districts} cases={cases} /> } />
-
             <Route path='/EmployCertificateDashboard' element={<EmployCertificateDashboard admin={adminD} states={states} districts={districts} cases={cases} /> } />
-
-
-
-
-
-
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

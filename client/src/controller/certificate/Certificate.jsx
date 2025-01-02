@@ -26,18 +26,18 @@ export default function Certificate() {
       {loading && <SpinnerLoader />}  
       <div>
         <h2>Certificate Monitoring {title} </h2>
-        <div className="certificate">
+        <div className="certificate1">
           {/* Replace default href with onClick handler */}
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/dashboard', title, stateTitle)}>Certificate Dashboard</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/casteCertificate', title, stateTitle)}>Caste Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/incomeCertificate', title, stateTitle)}>Income Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/residentialCertificate', title, stateTitle)}>Residential Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/rationcardCertificate', title, stateTitle)}>Ration Card</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/birthCertificate', title, stateTitle)}>Birth Certificate</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/disabilityCertificate', title, stateTitle)}>Disability Certificates</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/merriageCertificate', title, stateTitle)}>Merriage Certificates</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/seniorcitizenCertificate', title, stateTitle)}>Senior Citizen Certificates</a></div>
-          <div className="card"><a onClick={(e) => handleNavigation(e, '/characterCertificate', title, stateTitle)}>Character Certificates</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/dashboard', title, stateTitle)}>Certificate Dashboard</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/casteCertificate', title, stateTitle)}>Caste Certificate</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/incomeCertificate', title, stateTitle)}>Income Certificate</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/residentialCertificate', title, stateTitle)}>Residential Certificate</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/rationcardCertificate', title, stateTitle)}>Ration Card</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/birthCertificate', title, stateTitle)}>Birth Certificate</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/disabilityCertificate', title, stateTitle)}>Disability Certificates</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/merriageCertificate', title, stateTitle)}>Merriage Certificates</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/seniorcitizenCertificate', title, stateTitle)}>Senior Citizen Certificates</a></div>
+          <div className="card1"><a onClick={(e) => handleNavigation(e, '/characterCertificate', title, stateTitle)}>Character Certificates</a></div>
         </div>
       </div>
     </>

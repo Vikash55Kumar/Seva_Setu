@@ -1,6 +1,7 @@
 
 /* General Styles */
 .certificate-dash {
+  background-color: #fff;
     display: flex;
     height: 100vh;
     font-family: "Arial", sans-serif;
@@ -11,11 +12,10 @@
     color: #fff;
     width: 12rem;
     padding: 1rem;
-    position: fixed;
-    top: 0;
-    bottom: 0;
+    /* position: fixed; */
+    height: 60vh;
     transition: all 0.3s;
-    overflow-y: auto;
+    /* overflow-y: auto; */
   }
   
   .sidebar.show {
@@ -52,43 +52,28 @@
     background-color: #1c2938;
   }
   
-  /* Toggle Button */
-  .toggle-button {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    background-color: #2a3f54;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    z-index: 1000;
-  }
-  
-  .toggle-button:hover {
-    background-color: #1c2938;
-  }
-  
   .main-content {
-    margin-left: 12rem;
     flex-grow: 1;
-    padding: 2rem;
+    padding: 0rem .5rem;
     transition: all 0.3s;
   }
-  
-  .main-content.sidebar-open {
-    margin-left: 14rem;
+
+  .head1 {
+    background-color: #2a3f54;
+    color: #fff;
   }
-  
+
   /* Header Styles */
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0rem 1rem;
+    padding-bottom: .5rem;
     margin-bottom: 2rem;
   }
-  
+
+
   .header span {
     font-size: 1.2rem;
     font-weight: bold;

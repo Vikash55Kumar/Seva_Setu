@@ -16,7 +16,6 @@ function CertificateDashboard({ admin = {}, states = [], cases = [] }) {
   const [selectedRegion, setSelectedRegion] = useState({});
   const [freeResources, setfreeResources] = useState("");
 
-
   const regions = ["North-West", "North-East", "South-East", "South-West", "West"];
 
   const handleRegionChange = (caseId, region) => {
@@ -25,7 +24,6 @@ function CertificateDashboard({ admin = {}, states = [], cases = [] }) {
       [caseId]: region,
     }));
   };
-
 
   // New state to store Region & Service Data
   const [regionServiceData, setRegionServiceData] = useState([
@@ -66,79 +64,6 @@ function CertificateDashboard({ admin = {}, states = [], cases = [] }) {
   const handleCertificateTypeChange = (e) => {
     setCertificateType(e.target.value);
   };
-
-  // const handleSearch = () => {
-  //   if (!selectedState || !selectedDistrict || !selectedSubdivision || !certificateType) {
-  //     alert("Please select all fields before searching.");
-  //     return;
-  //   }
-
-  //   // Filter the cases based on the selected certificate type
-  //   const filtered = cases.filter((caseItem) => caseItem.certificateType === certificateType);
-  //   setFilteredCases(filtered); // Update filtered cases state
-
-  //   console.log("Search Parameters:", {
-  //     state: states.find((s) => s._id === selectedState)?.name,
-  //     district: states
-  //       .find((s) => s._id === selectedState)
-  //       ?.districts.find((d) => d._id === selectedDistrict)?.name,
-  //     subdivision: selectedSubdivisions.find((s) => s._id === selectedSubdivision)?.name,
-  //     certificateType,
-  //   });
-  // };
-
-  //   // Handle Allocation Logic (button click)
-  //   const handleAllocate = () => {
-  //     // Iterate over each case to check if the region is selected
-  //     const updatedRegionServiceData = regionServiceData.map((data) => {
-  //       // Find the corresponding region from selectedRegion
-  //       const selected = selectedRegion[data.regionName];
-  //       if (selected) {
-  //         // Check if there are enough free resources to allocate
-  //         const freeResource = data.requiredResource;
-  //         const resourceAllocation = data.resourceAllocated;
-  
-  //         if (freeResource > 0 && freeResource <= data.resourceAllocated) {
-  //           // Update resource allocation
-  //           return {
-  //             ...data,
-  //             resourceAllocation: resourceAllocation - freeResource, // Add to allocated resources
-  //             requiredResource: 0, // All required resources have been allocated
-  //           };
-  //         }
-  //       }
-  //       return data;
-  //     });
-
-  //     setRegionServiceData(updatedRegionServiceData);
-
-  //     // Now update the free resources in cases based on selectedRegion
-  //     const updatedCases = filteredCases.map((caseItem) => {
-  //       const region = selectedRegion[caseItem._id];
-  //       if (region) {
-  //         // Find the region service data and calculate the updated resources
-  //         const caseRegionData = regionServiceData.find((r) => r.regionName === region);
-  
-  //         if (caseRegionData) {
-  //           const updatedFreeResource = parseInt(caseItem.freeResource)- caseRegionData.requiredResource ;
-  //           return {
-  //             ...caseItem,
-  //             allocation: caseRegionData.resourceAllocated,
-  //             freeResource: updatedFreeResource.toString(),
-  //           };
-  //         }
-  //       }
-  //       return caseItem;
-  //     });
-  
-  //     setFilteredCases(updatedCases); // Update cases state after allocation
-  //   };
-
-
-  // Toggle sidebar visibility
-  
-  
-  
   
   const handleSearch = () => {
     if (!selectedState || !selectedDistrict || !selectedSubdivision || !certificateType) {
@@ -160,94 +85,25 @@ function CertificateDashboard({ admin = {}, states = [], cases = [] }) {
     });
   };
 
-  // Handle Allocation Logic (button click)
-  // const handleAllocate = () => {
-  //   // // Iterate over each case to check if the region is selected
-  //   const updatedRegionServiceData = regionServiceData.map((data) => {
-  //     // Find the corresponding region from selectedRegion
-  //     const selected = selectedRegion[data.regionName];
-  //     if (selected) {
-  //       // Check if there are enough free resources to allocate
-  //       const freeResource = data.requiredResource;
-  //       const resourceAllocation = data.resourceAllocated;
-  //       console.log(freeResource, resourceAllocation)
-
-  //   //     if (freeResource > 0 && freeResource <= data.resourceAllocated) {
-  //   //       // Update resource allocation
-  //   //       return {
-  //   //         ...data,
-  //   //         resourceAllocation: resourceAllocation - freeResource, // Add to allocated resources
-  //   //         requiredResource: 0, // All required resources have been allocated
-  //   //       };
-  //   //     }
-  //     }
-  //     return data;
-
-
-  //   });
-
-  //   // setRegionServiceData(updatedRegionServiceData);
-
-  //   // Now update the free resources in cases based on selectedRegion
-  //   // const updatedCases = filteredCases.map((caseItem) => {
-  //   //   const region = selectedRegion[caseItem._id];
-  //   //   if (region) {
-  //   //     // Find the region service data and calculate the updated resources
-  //   //     const caseRegionData = regionServiceData.find((r) => r.regionName === region);
-
-  //   //     if (caseRegionData) {
-  //   //       const updatedFreeResource = parseInt(caseItem.freeResource) - caseRegionData.requiredResource;
-  //   //       return {
-  //   //         ...caseItem,
-  //   //         allocation: caseRegionData.resourceAllocated,
-  //   //         freeResource: updatedFreeResource.toString(),
-  //   //       };
-  //   //     }
-  //   //   }
-  //   //   return caseItem;
-  //   // });
-
-  //   // setFilteredCases(updatedCases); // Update cases state after allocation
-  // };
-  
-const handleAllocate =(freeResource) => {
-  {regionServiceData.map((data, index) => (
-      
-    setRegionServiceData[data.resourceAllocated +=parseInt(freeResource)],
-    setRegionServiceData[data.requiredResource-=parseInt(freeResource)]
-      
-  ))
-  
+  const handleAllocate =(freeResource) => {
+    {regionServiceData.map((data, index) => (
+      setRegionServiceData[data.resourceAllocated +=parseInt(freeResource)],
+      setRegionServiceData[data.requiredResource-=parseInt(freeResource)]
+    ))
+    }
+    {filteredCases.map((caseItem) => (
+      setfreeResources[caseItem.freeResource-=freeResource]
+    ))
+    }
   }
-  {filteredCases.map((caseItem) => (
-    
-     setfreeResources[caseItem.freeResource-=freeResource]
-      
-    
-  ))
-  
-  }
-  
-}
-  
-  
   const toggleSidebar = () => setShowSidebar((prev) => !prev);
 
   return (
     <div className="certificate-dash">
-      {/* Button to toggle sidebar */}
-      <button
-        className="toggle-button"
-        onClick={toggleSidebar}
-        style={{ left: showSidebar ? "12rem" : "1rem" }}
-      >
-        {showSidebar ? <FaTimes /> : <FaBars />}
-      </button>
-
       {/* Sidebar */}
       <div className={`sidebar ${showSidebar ? "show" : ""}`}>
         <div className="dashboard-menu">
-          <h2>Certificate Dashboard</h2>
+          <h4>Choose Certificate </h4>
 
           {/* State Selection */}
           <div className="menu-item">
@@ -322,17 +178,15 @@ const handleAllocate =(freeResource) => {
       </div>
 
       {/* Main content area */}
-      <div className={`main-content ${showSidebar ? "sidebar-open" : ""}`}>
+      <div className={"main-content"}>
+        <div className="head1">
+        <h1>Admin Resource Allocation Dashboard</h1>
         <div className="header">
           <div>
-            <span>Certificate Dashboard</span>
-            <span>
-              Welcome back, <b>{fullName}</b>
-            </span>
+            <span >Welcome back, &nbsp; {fullName}</span>
           </div>
-          <a href="">
-            <img src="/img2.jpg" alt="Profile" />
-          </a>
+          <img src="/img2.jpg" alt="Profile" />
+        </div>
         </div>
 
 
@@ -375,24 +229,14 @@ const handleAllocate =(freeResource) => {
                   ))}
                 </select>
                 {handleAllocate(caseItem.freeResource)}
-              </td>
-              <td>
-                {/* <div className="btnw"><button onClick={handleAllocate(caseItem.freeResource)} >Allocate</button></div> */}
-              </td>
+                </td>
               </tr>
-            ))
-            
+              ))
             }
-            
           </tbody>
         </table>
-        <br />
+        <br/><br/>
         
-
-
-
-
-
         {/* Table displaying Region and Service Data when 'Caste' is selected */}
         {certificateType === "Caste" && (
           <div className="case-info">
@@ -422,10 +266,7 @@ const handleAllocate =(freeResource) => {
             </tbody>
           </table>
         )}
-
-
       </div>
-
     </div>
   );
 }
