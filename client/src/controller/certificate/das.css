@@ -55,8 +55,10 @@
     max-width: 800px;
   }
 
-  .buttons {
+  .buttons button {
     margin: 2rem;
+    width: 11rem;
+    height: 3.5rem;
   }
   
   button {

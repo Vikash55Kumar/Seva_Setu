@@ -27,6 +27,7 @@ export default function CastCertificate({adminProfile = {}}) {
 
   const { provider } = adminProfile || {}; 
 
+console.log(adminProfile);
 
   const location = useLocation();
   const title2 = location.state?.title;

@@ -7,7 +7,7 @@ import logo from "../../assets/logo.png";
 import { useNavigate } from 'react-router-dom';
 import SpinnerLoader from '../../utility/SpinnerLoader';
 
-const Navbar = ({adminProfile = {}}) => {
+const Navbar = ({adminProfile = {}, employeeProfile={}}) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSubDropdownOpen, setIsSubDropdownOpen] = useState(false);
@@ -16,7 +16,7 @@ const Navbar = ({adminProfile = {}}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const { provider } = adminProfile || {}; 
+    const { provider } = adminProfile || employeeProfile; 
 
     const { isAuthenticated } = useSelector((state) => ({
         isAuthenticated: state.admin?.isAuthenticated || state.user?.isAuthenticated,
@@ -69,12 +69,13 @@ const Navbar = ({adminProfile = {}}) => {
                 <FaBars className="fa-bars" />
                 <FaTimes className="fa-times" />
             </div>
-            
+
             <div className={`nav-links ${isNavOpen ? "active" : ""}`}>
                 <a href="/">Home</a>
+                {/* <a href="/reportList">List</a> */}
 
                 { provider=="Officer" ? <a href="/certificateDashboard" > Admin Resource</a> : "" }
-                { provider=="Officer" ? <a href="/EmployCertificateDashboard" >Employ Report</a> : "" }
+                { provider=="Employee" ? <a href="/EmployCertificateDashboard" >Employ Report</a> : "" }
                 {isAuthenticated ? <a href="/profile">Profile</a> : ""}
 
                 <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>

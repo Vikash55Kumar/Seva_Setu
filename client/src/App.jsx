@@ -76,12 +76,6 @@ function App() {
 
   // console.log(report);
 
-  const adminD = {
-    _id: "admin123",
-    fullName: "Admin User",
-    email: "admin@example.com",
-  };
-  
   const districts = [
     {
       _id: "1",
@@ -200,8 +194,6 @@ function App() {
     //   ],
     // },
   ];
-  
-  
 
   return (
     <>
@@ -219,7 +211,7 @@ function App() {
       {/* <SpinnerLoader /> */}
       <SocketProvider>
         <Router>
-          <Navbar adminProfile={admin?.data || null} />
+          <Navbar adminProfile={admin?.data || null} employeeProfile={user?.data} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/dashboard' element={isAuthenticated ? <Dashboard adminProfile={admin?.data || null} /> : <UserLogin /> } />
@@ -252,8 +244,8 @@ function App() {
             <Route path='/reportList' element={<ReporList title={title} />} />
             <Route path="/reportDashboard" element={<ReportDashboard adminProfile={admin?.data || null} />} />
             <Route path='/dwn' element={<FinalCertificate />} />
-            <Route path='/certificateDashboard' element={<CertificateDashboard admin={adminD} states={states} districts={districts} cases={cases} /> } />
-            <Route path='/EmployCertificateDashboard' element={<EmployCertificateDashboard admin={adminD} states={states} districts={districts} cases={cases} /> } />
+            <Route path='/certificateDashboard' element={<CertificateDashboard adminProfile={admin?.data} states={states} districts={districts} cases={cases} /> } />
+            <Route path='/EmployCertificateDashboard' element={<EmployCertificateDashboard employeeProfile={user?.data} states={states} districts={districts} cases={cases} /> } />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

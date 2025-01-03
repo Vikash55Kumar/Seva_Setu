@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./CertificateDashboard.css";
 
-function CertificateDashboard({ admin = {}, states = [], cases = [] }) {
-  const { fullName } = admin || {}; // Extract admin's name
+function CertificateDashboard({ adminProfile = {}, states = [], cases = [] }) {
+
   const [showSidebar, setShowSidebar] = useState(true); // Toggle for sidebar visibility
   const [selectedState, setSelectedState] = useState(""); // Selected state ID
   const [selectedDistrict, setSelectedDistrict] = useState(""); // Selected district ID
@@ -180,12 +180,12 @@ function CertificateDashboard({ admin = {}, states = [], cases = [] }) {
       {/* Main content area */}
       <div className={"main-content"}>
         <div className="head1">
-        <h1>Admin Resource Allocation Dashboard</h1>
+        <h1>Officer Resource Allocation Dashboard</h1>
         <div className="header">
           <div>
-            <span >Welcome back, &nbsp; {fullName}</span>
+            <span >Welcome back, &nbsp; {adminProfile.fullName}</span>
           </div>
-          <img src="/img2.jpg" alt="Profile" />
+          <img src={adminProfile.avatar} alt="Profile" />
         </div>
         </div>
 

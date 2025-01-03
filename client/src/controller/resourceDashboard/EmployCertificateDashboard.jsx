@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { FaBars, FaTimes } from "react-icons/fa";
 import "./CertificateDashboard.css";
-import vik from "../../assets/project.jpeg"
 
-function EmployCertificateDashboard({ admin = {}, states = [], cases = [] }) {
-  const { fullName } = admin || {}; // Extract admin's name
+function EmployCertificateDashboard({ employeeProfile = {}, states = [], cases = [] }) {
   const [showSidebar, setShowSidebar] = useState(true); // Toggle for sidebar visibility
   const [selectedState, setSelectedState] = useState(""); // Selected state ID
   const [selectedDistrict, setSelectedDistrict] = useState(""); // Selected district ID
@@ -13,19 +10,7 @@ function EmployCertificateDashboard({ admin = {}, states = [], cases = [] }) {
   const [selectedSubdivision, setSelectedSubdivision] = useState(""); // Selected subdivision ID
   const [certificateType, setCertificateType] = useState(""); // Selected certificate type
   const [filteredCases, setFilteredCases] = useState([]); // State to store filtered cases
-  const [certificateTypes] = useState(["Birth", "Caste", "Income", "Residence"]);
-  const [selectedRegion, setSelectedRegion] = useState({});
-
-
-  const regions = ["North-West", "North-East", "South-East", "South-West", "West"];
-
-  const handleRegionChange = (caseId, region) => {
-    setSelectedRegion((prevState) => ({
-      ...prevState,
-      [caseId]: region,
-    }));
-  };
-
+  const [certificateTypes] = useState(["Caste"]);
 
   // New state to store Region & Service Data
   const [regionServiceData, setRegionServiceData] = useState([
@@ -175,9 +160,9 @@ function EmployCertificateDashboard({ admin = {}, states = [], cases = [] }) {
           <h1>Employee Resource  Dashboard</h1>
           <div className="header">
             <div>
-              <span >Welcome back, &nbsp; {fullName}</span>
+              <span >Welcome back, &nbsp; {employeeProfile.fullName}</span>
             </div>
-            <img src={vik} alt="Profile" />
+            <img src={employeeProfile.avatar} alt="Profile" />
           </div>
         </div>
 

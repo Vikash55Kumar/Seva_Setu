@@ -1,0 +1,21 @@
+.list {
+    background-color: white;
+    width: 100vw;
+}
+.form-list {
+    width:15vw;
+    margin: 1rem;
+    border: .1rem solid black;  
+    padding:1rem;  
+    display:'flex';  
+    flex-direction:'column';  
+    /* gap:'15px'; */
+    box-shadow: "0 3px 10px rgb(0 0 0 / 0.2)";
+}
+
+.title {
+    /* width:'100%';  */
+    display: flex;
+    gap:'5px';
+    align-items:'center';
+}
