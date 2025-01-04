@@ -177,13 +177,13 @@ Set Up Environment Variables::
   ## - 🔭 Projects Link: [Seva Setu](https://seva-setu.netlify.app/)
 
 <div align="center"> 
-  <a href="https://vikashmernportfolio.up.railway.app/contact">
+  <a href="https://mernportfoliovikash.netlify.app/contact">
     <img src="https://img.shields.io/badge/Gmail-333333?style=for-the-badge&logo=gmail&logoColor=red" />
   </a>  &nbsp; &nbsp; 
   <a href="https://www.linkedin.com/in/software-enginner-vikash/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank" />
   </a> &nbsp; &nbsp; 
-  <a href="https://vikashmernportfolio.up.railway.app/" target="_blank">
+  <a href="https://mernportfoliovikash.netlify.app/" target="_blank">
      <img src="https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=todoist&logoColor=white" target="_blank" /> <!-- sqlite, safari, google-chrome are other good icon options -->
   </a>
 </div>
